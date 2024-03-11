@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">AndroidTestItemTouchHelperForDrawingSwipeBackground</string>
+
+    <!--  Components:  -->
+
+    <string name="component_list_item_background_hint_text_swipe_right_text">Accept</string>
+    <string name="component_list_item_background_hint_text_swipe_left_text">Decline</string>
+</resources>

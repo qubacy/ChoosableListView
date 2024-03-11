@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="SwipeHintView">
+        <attr name="swipeHintViewImage" format="reference"/>
+        <attr name="swipeHintViewImageColor" format="color"/>
+        <attr name="swipeHintViewText" format="string"/>
+        <attr name="swipeHintViewTextColor" format="color"/>
+    </declare-styleable>
+</resources>
