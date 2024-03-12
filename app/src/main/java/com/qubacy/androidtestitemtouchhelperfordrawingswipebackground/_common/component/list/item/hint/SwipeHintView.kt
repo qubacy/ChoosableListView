@@ -1,4 +1,4 @@
-package com.qubacy.androidtestitemtouchhelperfordrawingswipebackground.list.item.hint
+package com.qubacy.androidtestitemtouchhelperfordrawingswipebackground._common.component.list.item.hint
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -18,6 +18,10 @@ class SwipeHintView(
     context: Context,
     attrs: AttributeSet
 ) : LinearLayout(context, attrs) {
+    companion object {
+        const val TAG = "SwipeHintView"
+    }
+
     private var mBinding: ComponentListItemBackgroundHintBinding? = null
 
     private lateinit var mAnimatedImage: AnimatedVectorDrawableCompat

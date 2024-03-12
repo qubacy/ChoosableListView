@@ -1,17 +1,24 @@
-package com.qubacy.androidtestitemtouchhelperfordrawingswipebackground.list.animator
+package com.qubacy.androidtestitemtouchhelperfordrawingswipebackground._common.component.list.animator
 
 import android.animation.Animator
 import android.animation.Animator.AnimatorListener
 import android.animation.AnimatorListenerAdapter
+import android.util.Log
 import android.view.animation.AccelerateDecelerateInterpolator
 import android.view.animation.Interpolator
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.SimpleItemAnimator
 
 class SmoothListItemAnimator(
-    val animationDuration: Long,
+    val animationDuration: Long = DEFAULT_ANIMATION_DURATION,
     val animationInterpolator: Interpolator = AccelerateDecelerateInterpolator()
 ) : SimpleItemAnimator() {
+    companion object {
+        const val TAG = "SmoothListItemAnimator"
+
+        const val DEFAULT_ANIMATION_DURATION = 250L
+    }
+
     override fun animateChange(
         oldHolder: RecyclerView.ViewHolder?,
         newHolder: RecyclerView.ViewHolder?,
@@ -23,17 +30,11 @@ class SmoothListItemAnimator(
         return false
     }
 
-    override fun runPendingAnimations() {
+    override fun runPendingAnimations() {}
 
-    }
+    override fun endAnimation(item: RecyclerView.ViewHolder) {}
 
-    override fun endAnimation(item: RecyclerView.ViewHolder) {
-
-    }
-
-    override fun endAnimations() {
-
-    }
+    override fun endAnimations() {}
 
     override fun isRunning(): Boolean {
         return false
@@ -43,6 +44,8 @@ class SmoothListItemAnimator(
         if (holder == null) return false
 
         val onStartAction = {
+            Log.d(TAG, "animateRemove(): onStartAction entering..")
+
             holder.itemView.apply {
                 pivotX = (measuredWidth / 2).toFloat()
                 pivotY = 0f
@@ -51,6 +54,8 @@ class SmoothListItemAnimator(
             Unit
         }
         val onEndAction = {
+            Log.d(TAG, "animateRemove(): onEndAction entering..")
+
             dispatchRemoveFinished(holder)
 
             holder.itemView.scaleY = 1f

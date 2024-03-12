@@ -7,17 +7,18 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.divider.MaterialDividerItemDecoration
 import com.qubacy.androidtestitemtouchhelperfordrawingswipebackground.databinding.ActivityMainBinding
-import com.qubacy.androidtestitemtouchhelperfordrawingswipebackground.list.animator.SmoothListItemAnimator
-import com.qubacy.androidtestitemtouchhelperfordrawingswipebackground.list.adapter.StringListAdapter
-import com.qubacy.androidtestitemtouchhelperfordrawingswipebackground.list.helper.StringListItemTouchHelperCallback
+import com.qubacy.androidtestitemtouchhelperfordrawingswipebackground._common.component.list.animator.SmoothListItemAnimator
+import com.qubacy.androidtestitemtouchhelperfordrawingswipebackground.component.list.adapter.StringListAdapter
+import com.qubacy.androidtestitemtouchhelperfordrawingswipebackground._common.component.list.helper.StringListItemTouchHelperCallback
+import com.qubacy.androidtestitemtouchhelperfordrawingswipebackground.component.list.item.content.data.StringContentItemData
 import com.qubacy.androidtestitemtouchhelperfordrawingswipebackground.util.resolveColorAttr
 
 class MainActivity : AppCompatActivity(), StringListItemTouchHelperCallback.Callback {
     companion object {
         val LIST_ITEMS = listOf(
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-            "Tristique et egestas quis ipsum suspendisse ultrices gravida dictum. Amet mauris commodo quis imperdiet massa tincidunt nunc. Consequat mauris nunc congue nisi vitae suscipit tellus. Lacus luctus accumsan tortor posuere ac ut consequat semper viverra.",
-            "Turpis egestas pretium aenean pharetra magna ac placerat. Potenti nullam ac tortor vitae purus faucibus. Arcu cursus euismod quis viverra nibh cras. Massa sapien faucibus et molestie. Nibh cras pulvinar mattis nunc sed blandit. Non odio euismod lacinia at quis risus sed vulputate. Aliquam faucibus purus in massa tempor nec feugiat."
+            StringContentItemData("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."),
+            StringContentItemData("Tristique et egestas quis ipsum suspendisse ultrices gravida dictum. Amet mauris commodo quis imperdiet massa tincidunt nunc. Consequat mauris nunc congue nisi vitae suscipit tellus. Lacus luctus accumsan tortor posuere ac ut consequat semper viverra."),
+            StringContentItemData("Turpis egestas pretium aenean pharetra magna ac placerat. Potenti nullam ac tortor vitae purus faucibus. Arcu cursus euismod quis viverra nibh cras. Massa sapien faucibus et molestie. Nibh cras pulvinar mattis nunc sed blandit. Non odio euismod lacinia at quis risus sed vulputate. Aliquam faucibus purus in massa tempor nec feugiat.")
         )
     }
 
@@ -44,11 +45,11 @@ class MainActivity : AppCompatActivity(), StringListItemTouchHelperCallback.Call
         initListItemTouchHelper(mBinding.list)
     }
 
-    private fun initListData(): MutableList<String> {
+    private fun initListData(): MutableList<StringContentItemData> {
         return LIST_ITEMS.toMutableList()
     }
 
-    private fun initListAdapter(items: List<String>): StringListAdapter {
+    private fun initListAdapter(items: List<StringContentItemData>): StringListAdapter {
         return StringListAdapter().apply {
             setItems(items)
         }
@@ -66,7 +67,7 @@ class MainActivity : AppCompatActivity(), StringListItemTouchHelperCallback.Call
             addItemDecoration(decorationDivider)
 
             adapter = listAdapter
-            itemAnimator = SmoothListItemAnimator(330, AccelerateInterpolator())
+            itemAnimator = SmoothListItemAnimator()
         }
     }
 
@@ -87,7 +88,7 @@ class MainActivity : AppCompatActivity(), StringListItemTouchHelperCallback.Call
     }
 
     private fun onAddClicked() {
-        mAdapter.addItem(LIST_ITEMS.first())
+        mAdapter.addItem(LIST_ITEMS.last())
     }
 
     override fun onItemSwiped(

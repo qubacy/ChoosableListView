@@ -1,19 +1,22 @@
-package com.qubacy.androidtestitemtouchhelperfordrawingswipebackground.list.helper
+package com.qubacy.androidtestitemtouchhelperfordrawingswipebackground._common.component.list.helper
 
 import android.graphics.Canvas
 import android.graphics.Color
+import android.util.Log
 import android.view.View
 import androidx.annotation.ColorInt
 import androidx.annotation.FloatRange
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
-import com.qubacy.androidtestitemtouchhelperfordrawingswipebackground.list.adapter.StringListAdapter
-import com.qubacy.androidtestitemtouchhelperfordrawingswipebackground.list.item.hint.SwipeHintView
+import com.qubacy.androidtestitemtouchhelperfordrawingswipebackground._common.component.list.adapter.ChoosableListAdapter
+import com.qubacy.androidtestitemtouchhelperfordrawingswipebackground._common.component.list.item.ChoosableItemView
+import com.qubacy.androidtestitemtouchhelperfordrawingswipebackground._common.component.list.item.hint.SwipeHintView
 import kotlin.math.abs
 
 class StringListItemTouchHelperCallback(
-    private val mSwipeThreshold: Float = 0.5f,
+    private val mSwipeThreshold: Float = DEFAULT_SWIPE_THRESHOLD,
+    private val mHintThreshold: Float = DEFAULT_HINT_THRESHOLD,
     private val mCallback: Callback,
     @ColorInt
     private val mLeftSwipeBackgroundColor: Int = Color.RED,
@@ -31,7 +34,17 @@ class StringListItemTouchHelperCallback(
         fun onItemSwiped(direction: SwipeDirection, position: Int)
     }
 
-    private var mSwipeHintAnimated: Boolean = false
+    companion object {
+        const val TAG = "SLItemTouchHelperClback"
+
+        const val DEFAULT_SWIPE_THRESHOLD = 0.5f
+        const val DEFAULT_HINT_THRESHOLD = 0.6f
+    }
+
+    init {
+        if (mHintThreshold <= mSwipeThreshold)
+            throw IllegalArgumentException()
+    }
 
     override fun onMove(
         recyclerView: RecyclerView,
@@ -54,23 +67,23 @@ class StringListItemTouchHelperCallback(
         actionState: Int,
         isCurrentlyActive: Boolean
     ) {
-        val itemBinding = (viewHolder as StringListAdapter.StringListItemViewHolder).itemBinding
+        val itemView = viewHolder.itemView as ChoosableItemView<*, *>
 
         if (isHorizontalSwipe(dX, dY)) {
             val swipeDirection = getSwipeDirectionByDeltaX(dX)
-            val swipeProgress = (abs(dX) / itemBinding.root.measuredWidth) // 0..1;
+            val swipeProgress = (abs(dX) / itemView.measuredWidth) // 0..1;
 
             val hintView = when (swipeDirection) {
-                SwipeDirection.LEFT -> itemBinding.componentListItemBackgroundHintLeft
-                SwipeDirection.RIGHT -> itemBinding.componentListItemBackgroundHintRight
+                SwipeDirection.LEFT -> itemView.getLeftSwipingHintView()
+                SwipeDirection.RIGHT -> itemView.getRightSwipingHintView()
             }
 
             if (!hintView.isInitialized()) hintView.init()
 
-            adjustBackground(itemBinding.root, hintView, swipeDirection, swipeProgress)
+            adjustBackground(itemView, hintView, swipeDirection, swipeProgress)
         }
 
-        drawItem(c, itemBinding.componentListItemContent, dX)
+        drawItem(c, itemView.contentView, dX)
     }
 
     private fun adjustBackground(
@@ -90,13 +103,10 @@ class StringListItemTouchHelperCallback(
         itemHintView: SwipeHintView,
         @FloatRange(0.0, 1.0) swipeProgress: Float
     ) {
-        if (swipeProgress < mSwipeThreshold) {
-            itemHintView.resetAnimation()
+        if (swipeProgress < mSwipeThreshold) return itemHintView.resetAnimation()
 
-            return
-        }
-
-        val mappedSwipeProgress = (swipeProgress - mSwipeThreshold) * (1f / abs(0.6f - mSwipeThreshold))
+        val mappedSwipeProgress = (swipeProgress - mSwipeThreshold) *
+                (1f / abs(mHintThreshold - mSwipeThreshold))
         val preparedSwipeProcess = if (mappedSwipeProgress > 1f) 1f else mappedSwipeProgress
 
         itemHintView.animateWithProgress(preparedSwipeProcess)
@@ -105,9 +115,11 @@ class StringListItemTouchHelperCallback(
     override fun clearView(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder) {
         super.clearView(recyclerView, viewHolder)
 
-        val itemBinding = (viewHolder as StringListAdapter.StringListItemViewHolder).itemBinding
+        Log.d(TAG, "clearView() entering..")
 
-        itemBinding.componentListItemContent.translationX = 0f
+        val itemViewHolder = (viewHolder as ChoosableListAdapter.ChoosableListItemViewHolder<*, *>)
+
+        itemViewHolder.choosableItemView.resetView()
     }
 
     private fun drawItem(
