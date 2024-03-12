@@ -17,7 +17,7 @@
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.5"/>
 
-    <com.qubacy.androidtestitemtouchhelperfordrawingswipebackground._common.component.list.item.hint.SwipeHintView
+    <com.qubacy.choosablelistview._common.component.list.item.hint.SwipeHintView
         android:id="@+id/component_choosable_list_item_hint_left"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -32,7 +32,7 @@
         app:swipeHintViewText="@string/component_choosable_list_item_hint_text_swipe_left_text"
         app:swipeHintViewTextColor="?attr/colorOnErrorContainer"/>
 
-    <com.qubacy.androidtestitemtouchhelperfordrawingswipebackground._common.component.list.item.hint.SwipeHintView
+    <com.qubacy.choosablelistview._common.component.list.item.hint.SwipeHintView
         android:id="@+id/component_choosable_list_item_hint_right"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

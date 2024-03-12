@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Base.Theme.AndroidTestItemTouchHelperForDrawingSwipeBackground" parent="Theme.Material3.DayNight.NoActionBar">
+    <style name="Base.Theme.ChoosableListView" parent="Theme.Material3.DayNight.NoActionBar">
         <item name="choosableListItemLeftSwipeBackgroundColor">?attr/colorErrorContainer</item>
         <item name="choosableListItemRightSwipeBackgroundColor">?attr/colorPrimaryContainer</item>
 
@@ -15,5 +15,5 @@
         <item name="choosableListItemRightSwipeHintViewTextColor">?attr/colorOnPrimaryContainer</item>
     </style>
 
-    <style name="Theme.AndroidTestItemTouchHelperForDrawingSwipeBackground" parent="Base.Theme.AndroidTestItemTouchHelperForDrawingSwipeBackground" />
+    <style name="Theme.ChoosableListView" parent="Base.Theme.ChoosableListView" />
 </resources>

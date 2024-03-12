@@ -13,6 +13,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "AndroidTestItemTouchHelperForDrawingSwipeBackground"
+rootProject.name = "ChoosableListView"
 include(":app")
  
