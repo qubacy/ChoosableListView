@@ -2,6 +2,7 @@ package com.qubacy.androidtestitemtouchhelperfordrawingswipebackground.component
 
 import android.content.Context
 import android.view.ViewGroup
+import com.google.android.material.divider.MaterialDivider
 import com.qubacy.androidtestitemtouchhelperfordrawingswipebackground._common.component.list.adapter.producer.ChoosableItemViewProducer
 import com.qubacy.androidtestitemtouchhelperfordrawingswipebackground._common.component.list.item.ChoosableItemView
 import com.qubacy.androidtestitemtouchhelperfordrawingswipebackground.component.list.item.content.StringContentItemView
@@ -21,5 +22,9 @@ class StringItemViewProducer(
         val itemView = createChoosableItemView(parent, contentItemView)
 
         return itemView
+    }
+
+    override fun createDivider(context: Context): MaterialDivider {
+        return MaterialDivider(context)
     }
 }

@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.divider.MaterialDividerItemDecoration
 import com.qubacy.androidtestitemtouchhelperfordrawingswipebackground._common.component.list._common.SwipeDirection
 import com.qubacy.androidtestitemtouchhelperfordrawingswipebackground.databinding.ActivityMainBinding
 import com.qubacy.androidtestitemtouchhelperfordrawingswipebackground._common.component.list.animator.SmoothListItemAnimator
@@ -12,7 +11,6 @@ import com.qubacy.androidtestitemtouchhelperfordrawingswipebackground.component.
 import com.qubacy.androidtestitemtouchhelperfordrawingswipebackground._common.component.list.helper.ChoosableListItemTouchHelperCallback
 import com.qubacy.androidtestitemtouchhelperfordrawingswipebackground.component.list.adapter.producer.StringItemViewProducer
 import com.qubacy.androidtestitemtouchhelperfordrawingswipebackground.component.list.item.content.data.StringContentItemData
-import com.qubacy.androidtestitemtouchhelperfordrawingswipebackground.util.resolveColorAttr
 
 class MainActivity : AppCompatActivity(), ChoosableListItemTouchHelperCallback.Callback {
     companion object {
@@ -59,16 +57,7 @@ class MainActivity : AppCompatActivity(), ChoosableListItemTouchHelperCallback.C
     }
 
     private fun initListView(listAdapter: StringListAdapter) {
-        val decorationDivider = MaterialDividerItemDecoration(
-            this@MainActivity, MaterialDividerItemDecoration.HORIZONTAL
-        ).apply {
-            dividerColor = theme.resolveColorAttr(
-                com.google.android.material.R.attr.colorOnSurface)
-        }
-
         mBinding.list.apply {
-            addItemDecoration(decorationDivider)
-
             adapter = listAdapter
             itemAnimator = SmoothListItemAnimator()
         }

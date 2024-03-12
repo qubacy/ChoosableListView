@@ -7,6 +7,7 @@ import android.view.View
 import androidx.annotation.ColorInt
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.res.ResourcesCompat
+import com.google.android.material.divider.MaterialDivider
 import com.qubacy.androidtestitemtouchhelperfordrawingswipebackground.R
 import com.qubacy.androidtestitemtouchhelperfordrawingswipebackground._common.component.list._common.SwipeDirection
 import com.qubacy.androidtestitemtouchhelperfordrawingswipebackground.databinding.ComponentChoosableListItemBinding
@@ -17,7 +18,8 @@ import com.qubacy.androidtestitemtouchhelperfordrawingswipebackground._common.co
 class ChoosableItemView<ContentViewType, ContentItemDataType : ChoosableItemContentViewData>(
     context: Context,
     attrs: AttributeSet?,
-    contentView: ContentViewType
+    contentView: ContentViewType,
+    divider: MaterialDivider? = null
 ) : ConstraintLayout(
     context, attrs
 ) where ContentViewType : View, ContentViewType : ChoosableItemContentView<ContentItemDataType> {
@@ -41,7 +43,7 @@ class ChoosableItemView<ContentViewType, ContentItemDataType : ChoosableItemCont
 
     init {
         initValues()
-        inflate(contentView)
+        inflate(contentView, divider)
         initLayoutParams(contentView)
     }
 
@@ -58,17 +60,18 @@ class ChoosableItemView<ContentViewType, ContentItemDataType : ChoosableItemCont
         mHeightInPx = resources.getDimension(R.dimen.component_choosable_list_item_height)
     }
 
-    private fun inflate(contentView: View) {
+    private fun inflate(contentView: View, divider: MaterialDivider? = null) {
         val layoutInflater = LayoutInflater.from(context)
 
         mBinding = ComponentChoosableListItemBinding.inflate(
             layoutInflater, this
         ).apply {
             addView(contentView)
+            addView(divider)
         }
     }
 
-    private fun initLayoutParams(contentView: View) {
+    private fun initLayoutParams(contentView: View, divider: MaterialDivider? = null) {
         layoutParams = LayoutParams(
             LayoutParams.MATCH_PARENT,
             mHeightInPx.toInt()
@@ -82,6 +85,10 @@ class ChoosableItemView<ContentViewType, ContentItemDataType : ChoosableItemCont
         contentView.apply {
             this@apply.layoutParams = LayoutParams(
                 LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT)
+        }
+        divider?.apply {
+            this@apply.layoutParams = LayoutParams(
+                LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT)
         }
     }
 

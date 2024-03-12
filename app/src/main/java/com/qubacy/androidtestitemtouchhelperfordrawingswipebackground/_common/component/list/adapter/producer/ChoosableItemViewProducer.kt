@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.ColorInt
 import androidx.annotation.DrawableRes
+import com.google.android.material.divider.MaterialDivider
 import com.qubacy.androidtestitemtouchhelperfordrawingswipebackground.R
 import com.qubacy.androidtestitemtouchhelperfordrawingswipebackground._common.component.list.item.ChoosableItemView
 import com.qubacy.androidtestitemtouchhelperfordrawingswipebackground._common.component.list.item.content.ChoosableItemContentView
@@ -66,13 +67,19 @@ abstract class ChoosableItemViewProducer<
     protected fun createChoosableItemView(
         parent: ViewGroup, contentItemView: ContentViewType
     ): ChoosableItemView<ContentViewType, ContentItemDataType> {
-        return ChoosableItemView(parent.context, null, contentItemView).apply {
+        val divider = createDivider(parent.context)
+
+        return ChoosableItemView(parent.context, null, contentItemView, divider).apply {
             setLeftHintContent(getLeftSwipingHintView())
             setRightHintContent(getRightSwipingHintView())
 
             setLeftSwipeBackgroundColor(mLeftSwipeBackgroundColor)
             setRightSwipeBackgroundColor(mRightSwipeBackgroundColor)
         }
+    }
+
+    protected open fun createDivider(context: Context): MaterialDivider? {
+        return null
     }
 
     protected fun setLeftHintContent(leftHintView: SwipeHintView) {
