@@ -2,14 +2,15 @@
 <resources>
     <!--  General:  -->
 
-    <integer name="drawing_animation_duration">150</integer>
+    <integer name="choosable_list_item_drawing_animation_duration">150</integer>
 
     <!--  Components:  -->
 
-    <dimen name="component_list_item_height">100dp</dimen>
-    <dimen name="component_list_item_hint_threshold">0.6</dimen>
-    <dimen name="component_list_item_left_hint_guideline_position">
-        @dimen/component_list_item_hint_threshold
+    <dimen name="component_choosable_list_item_height">100dp</dimen>
+    <dimen name="component_choosable_list_item_hint_threshold">0.6</dimen>
+    <dimen name="component_choosable_list_item_left_hint_guideline_position">
+        @dimen/component_choosable_list_item_hint_threshold
     </dimen>
+    <dimen name="component_choosable_list_item_hint_icon_size">48dp</dimen>
 
 </resources>

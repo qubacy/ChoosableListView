@@ -5,14 +5,14 @@ import android.util.AttributeSet
 import android.widget.FrameLayout
 import androidx.core.view.setPadding
 import com.google.android.material.textview.MaterialTextView
-import com.qubacy.androidtestitemtouchhelperfordrawingswipebackground._common.component.list.item.content.ContentItemView
+import com.qubacy.androidtestitemtouchhelperfordrawingswipebackground._common.component.list.item.content.ChoosableItemContentView
 import com.qubacy.androidtestitemtouchhelperfordrawingswipebackground.component.list.item.content.data.StringContentItemData
 import com.qubacy.androidtestitemtouchhelperfordrawingswipebackground.util.resolveColorAttr
 
 class StringContentItemView(
     context: Context,
     attrs: AttributeSet?
-) : FrameLayout(context, attrs), ContentItemView<StringContentItemData> {
+) : FrameLayout(context, attrs), ChoosableItemContentView<StringContentItemData> {
     companion object {
         const val DEFAULT_PADDING_PX = 20
     }

@@ -2,33 +2,34 @@ package com.qubacy.androidtestitemtouchhelperfordrawingswipebackground._common.c
 
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.UiThread
 import androidx.recyclerview.widget.RecyclerView
-import com.qubacy.androidtestitemtouchhelperfordrawingswipebackground._common.component.list.adapter.producer.ItemViewProducer
+import com.qubacy.androidtestitemtouchhelperfordrawingswipebackground._common.component.list.adapter.producer.ChoosableItemViewProducer
 import com.qubacy.androidtestitemtouchhelperfordrawingswipebackground._common.component.list.item.ChoosableItemView
-import com.qubacy.androidtestitemtouchhelperfordrawingswipebackground._common.component.list.item.content.ContentItemView
-import com.qubacy.androidtestitemtouchhelperfordrawingswipebackground._common.component.list.item.content.data.ContentItemData
+import com.qubacy.androidtestitemtouchhelperfordrawingswipebackground._common.component.list.item.content.ChoosableItemContentView
+import com.qubacy.androidtestitemtouchhelperfordrawingswipebackground._common.component.list.item.content.data.ChoosableItemContentViewData
 
 abstract class ChoosableListAdapter<
-    ContentItemViewType, ContentItemDataType : ContentItemData,
+    ContentItemViewType, ContentItemDataType : ChoosableItemContentViewData,
     ViewHolderType : ChoosableListAdapter.ChoosableListItemViewHolder<ContentItemViewType, ContentItemDataType>
 >(
-    private val mItemViewProducer: ItemViewProducer<ContentItemViewType, ContentItemDataType>
+    private val mItemViewProducer: ChoosableItemViewProducer<ContentItemViewType, ContentItemDataType>
 ) : RecyclerView.Adapter<ChoosableListAdapter.ChoosableListItemViewHolder<
         ContentItemViewType, ContentItemDataType>
 >(
 
-) where ContentItemViewType : ContentItemView<ContentItemDataType>, ContentItemViewType : View {
+) where ContentItemViewType : ChoosableItemContentView<ContentItemDataType>, ContentItemViewType : View {
     companion object {
         const val TAG = "ChoosableListAdapter"
     }
 
     abstract class ChoosableListItemViewHolder<
-        ContentViewType, ContentItemDataType : ContentItemData
+        ContentViewType, ContentItemDataType : ChoosableItemContentViewData
     >(
         val choosableItemView: ChoosableItemView<ContentViewType, ContentItemDataType>
     ) : RecyclerView.ViewHolder(
         choosableItemView
-    ) where ContentViewType : View, ContentViewType : ContentItemView<ContentItemDataType> {
+    ) where ContentViewType : View, ContentViewType : ChoosableItemContentView<ContentItemDataType> {
         fun setData(contentItemData: ContentItemDataType) {
             choosableItemView.contentView.setData(contentItemData)
         }
@@ -62,18 +63,21 @@ abstract class ChoosableListAdapter<
         return mItems.size
     }
 
+    @UiThread
     fun removeItemAtPosition(position: Int) {
         mItems.removeAt(position)
 
         notifyItemRemoved(position)
     }
 
+    @UiThread
     fun addItem(item: ContentItemDataType) {
         mItems.add(item)
 
         notifyItemInserted(mItems.size - 1)
     }
 
+    @UiThread
     fun setItems(items: List<ContentItemDataType>) {
         mItems.apply {
             clear()

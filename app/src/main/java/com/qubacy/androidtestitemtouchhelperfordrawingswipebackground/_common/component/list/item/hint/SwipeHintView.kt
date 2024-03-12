@@ -12,7 +12,7 @@ import androidx.annotation.FloatRange
 import androidx.core.graphics.drawable.DrawableCompat
 import androidx.vectordrawable.graphics.drawable.AnimatedVectorDrawableCompat
 import com.qubacy.androidtestitemtouchhelperfordrawingswipebackground.R
-import com.qubacy.androidtestitemtouchhelperfordrawingswipebackground.databinding.ComponentListItemBackgroundHintBinding
+import com.qubacy.androidtestitemtouchhelperfordrawingswipebackground.databinding.ComponentChoosableListItemHintBinding
 
 class SwipeHintView(
     context: Context,
@@ -22,15 +22,15 @@ class SwipeHintView(
         const val TAG = "SwipeHintView"
     }
 
-    private var mBinding: ComponentListItemBackgroundHintBinding? = null
+    private var mBinding: ComponentChoosableListItemHintBinding? = null
 
     private lateinit var mAnimatedImage: AnimatedVectorDrawableCompat
     private var mSwipeHintAnimated: Boolean = false
 
     @DrawableRes
-    private var mImageResId: Int = 0
+    private var mIconResId: Int = 0
     @ColorInt
-    private var mImageColor: Int = 0
+    private var mIconTint: Int = 0
     private lateinit var mText: String
     @ColorInt
     private var mTextColor: Int = 0
@@ -45,13 +45,13 @@ class SwipeHintView(
     }
 
     fun setContent(
-        @DrawableRes imageResId: Int = mImageResId,
-        @ColorInt imageColor: Int = mImageColor,
+        @DrawableRes iconResId: Int = mIconResId,
+        @ColorInt iconTint: Int = mIconTint,
         text: String = mText,
         @ColorInt textColor: Int = mTextColor
     ) {
-        mImageResId = imageResId
-        mImageColor = imageColor
+        mIconResId = iconResId
+        mIconTint = iconTint
         mText = text
         mTextColor = textColor
 
@@ -70,7 +70,7 @@ class SwipeHintView(
     private fun inflate() {
         val layoutInflater = LayoutInflater.from(context)
 
-        mBinding = ComponentListItemBackgroundHintBinding
+        mBinding = ComponentChoosableListItemHintBinding
             .inflate(layoutInflater, this)
     }
 
@@ -86,8 +86,8 @@ class SwipeHintView(
             )
         ).apply {
             try {
-                mImageResId = getResourceId(0, 0)
-                mImageColor = getColor(1, 0)
+                mIconResId = getResourceId(0, 0)
+                mIconTint = getColor(1, 0)
                 mText = getString(2) ?: String()
                 mTextColor = getColor(3, 0)
 
@@ -106,23 +106,19 @@ class SwipeHintView(
     }
 
     private fun initContent() {
-        mAnimatedImage = AnimatedVectorDrawableCompat.create(context, mImageResId)!!.apply {
+        mAnimatedImage = AnimatedVectorDrawableCompat.create(context, mIconResId)!!.apply {
             val wrappedImage = DrawableCompat.wrap(this)
 
-            DrawableCompat.setTint(wrappedImage, mImageColor)
+            DrawableCompat.setTint(wrappedImage, mIconTint)
         }
 
         mBinding!!.apply {
             alpha = 0f
 
-            componentListItemBackgroundHintImage.setImageDrawable(mAnimatedImage)
-            componentListItemBackgroundHintText.setTextColor(mTextColor)
-            componentListItemBackgroundHintText.text = mText
+            componentListItemHintIcon.setImageDrawable(mAnimatedImage)
+            componentListItemHintText.setTextColor(mTextColor)
+            componentListItemHintText.text = mText
         }
-
-        mBinding!!.componentListItemBackgroundHintImage.setImageDrawable(mAnimatedImage)
-        mBinding!!.componentListItemBackgroundHintText.setTextColor(mTextColor)
-        mBinding!!.componentListItemBackgroundHintText.text = mText
     }
 
     fun resetAnimation() {

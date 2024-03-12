@@ -4,7 +4,7 @@
 
     <objectAnimator
         android:propertyName="pathData"
-        android:duration="@integer/drawing_animation_duration"
+        android:duration="@integer/choosable_list_item_drawing_animation_duration"
         android:interpolator="@android:anim/accelerate_interpolator"
         android:valueType="pathType"
         android:valueFrom="M49.3,-0.2L59.2,9.7L57,11.9L47,2.1Z"

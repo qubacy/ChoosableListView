@@ -9,12 +9,12 @@ import com.qubacy.androidtestitemtouchhelperfordrawingswipebackground._common.co
 import com.qubacy.androidtestitemtouchhelperfordrawingswipebackground.databinding.ActivityMainBinding
 import com.qubacy.androidtestitemtouchhelperfordrawingswipebackground._common.component.list.animator.SmoothListItemAnimator
 import com.qubacy.androidtestitemtouchhelperfordrawingswipebackground.component.list.adapter.StringListAdapter
-import com.qubacy.androidtestitemtouchhelperfordrawingswipebackground._common.component.list.helper.StringListItemTouchHelperCallback
+import com.qubacy.androidtestitemtouchhelperfordrawingswipebackground._common.component.list.helper.ChoosableListItemTouchHelperCallback
 import com.qubacy.androidtestitemtouchhelperfordrawingswipebackground.component.list.adapter.producer.StringItemViewProducer
 import com.qubacy.androidtestitemtouchhelperfordrawingswipebackground.component.list.item.content.data.StringContentItemData
 import com.qubacy.androidtestitemtouchhelperfordrawingswipebackground.util.resolveColorAttr
 
-class MainActivity : AppCompatActivity(), StringListItemTouchHelperCallback.Callback {
+class MainActivity : AppCompatActivity(), ChoosableListItemTouchHelperCallback.Callback {
     companion object {
         val LIST_ITEMS = listOf(
             StringContentItemData("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."),
@@ -63,7 +63,7 @@ class MainActivity : AppCompatActivity(), StringListItemTouchHelperCallback.Call
             this@MainActivity, MaterialDividerItemDecoration.HORIZONTAL
         ).apply {
             dividerColor = theme.resolveColorAttr(
-                com.google.android.material.R.attr.colorOutlineVariant)
+                com.google.android.material.R.attr.colorOnSurface)
         }
 
         mBinding.list.apply {
@@ -75,7 +75,7 @@ class MainActivity : AppCompatActivity(), StringListItemTouchHelperCallback.Call
     }
 
     private fun initListItemTouchHelper(listView: RecyclerView) {
-        val itemTouchHelperCallback = StringListItemTouchHelperCallback(
+        val itemTouchHelperCallback = ChoosableListItemTouchHelperCallback(
             mCallback = this
         )
         val itemTouchHelper = ItemTouchHelper(itemTouchHelperCallback)

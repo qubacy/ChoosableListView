@@ -13,7 +13,7 @@
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         android:orientation="vertical"
         tools:itemCount="3"
-        tools:listitem="@layout/component_list_item"/>
+        tools:listitem="@layout/component_choosable_list_item"/>
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/button_add"

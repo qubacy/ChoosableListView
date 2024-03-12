@@ -7,16 +7,16 @@
         <attr name="swipeHintViewTextColor" format="color"/>
     </declare-styleable>
 
-    <attr name="choosableItemViewLeftSwipeBackgrouncColor" format="color"/>
-    <attr name="choosableItemViewRightSwipeBackgrouncColor" format="color"/>
+    <attr name="choosableListItemLeftSwipeBackgroundColor" format="color"/>
+    <attr name="choosableListItemRightSwipeBackgroundColor" format="color"/>
 
-    <attr name="leftSwipeHintViewIcon" format="reference"/>
-    <attr name="leftSwipeHintViewIconTint" format="color"/>
-    <attr name="leftSwipeHintViewText" format="string"/>
-    <attr name="leftSwipeHintViewTextColor" format="color"/>
+    <attr name="choosableListItemLeftSwipeHintViewIcon" format="reference"/>
+    <attr name="choosableListItemLeftSwipeHintViewIconTint" format="color"/>
+    <attr name="choosableListItemLeftSwipeHintViewText" format="string"/>
+    <attr name="choosableListItemLeftSwipeHintViewTextColor" format="color"/>
 
-    <attr name="rightSwipeHintViewIcon" format="reference"/>
-    <attr name="rightSwipeHintViewIconTint" format="color"/>
-    <attr name="rightSwipeHintViewText" format="string"/>
-    <attr name="rightSwipeHintViewTextColor" format="color"/>
+    <attr name="choosableListItemRightSwipeHintViewIcon" format="reference"/>
+    <attr name="choosableListItemRightSwipeHintViewIconTint" format="color"/>
+    <attr name="choosableListItemRightSwipeHintViewText" format="string"/>
+    <attr name="choosableListItemRightSwipeHintViewTextColor" format="color"/>
 </resources>

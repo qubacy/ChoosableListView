@@ -12,7 +12,7 @@ import com.qubacy.androidtestitemtouchhelperfordrawingswipebackground._common.co
 import com.qubacy.androidtestitemtouchhelperfordrawingswipebackground._common.component.list.item.hint.SwipeHintView
 import kotlin.math.abs
 
-class StringListItemTouchHelperCallback(
+class ChoosableListItemTouchHelperCallback(
     private val mSwipeThreshold: Float = DEFAULT_SWIPE_THRESHOLD,
     private val mHintThreshold: Float = DEFAULT_HINT_THRESHOLD,
     private val mCallback: Callback
@@ -25,7 +25,7 @@ class StringListItemTouchHelperCallback(
     }
 
     companion object {
-        const val TAG = "SLItemTouchHelperClback"
+        const val TAG = "ChItemTouchHelperClback"
 
         const val DEFAULT_SWIPE_THRESHOLD = 0.5f
         const val DEFAULT_HINT_THRESHOLD = 0.6f

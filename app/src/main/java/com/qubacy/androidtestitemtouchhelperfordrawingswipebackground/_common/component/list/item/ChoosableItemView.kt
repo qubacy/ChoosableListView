@@ -9,18 +9,18 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.res.ResourcesCompat
 import com.qubacy.androidtestitemtouchhelperfordrawingswipebackground.R
 import com.qubacy.androidtestitemtouchhelperfordrawingswipebackground._common.component.list._common.SwipeDirection
-import com.qubacy.androidtestitemtouchhelperfordrawingswipebackground.databinding.ComponentListItemBinding
-import com.qubacy.androidtestitemtouchhelperfordrawingswipebackground._common.component.list.item.content.ContentItemView
-import com.qubacy.androidtestitemtouchhelperfordrawingswipebackground._common.component.list.item.content.data.ContentItemData
+import com.qubacy.androidtestitemtouchhelperfordrawingswipebackground.databinding.ComponentChoosableListItemBinding
+import com.qubacy.androidtestitemtouchhelperfordrawingswipebackground._common.component.list.item.content.ChoosableItemContentView
+import com.qubacy.androidtestitemtouchhelperfordrawingswipebackground._common.component.list.item.content.data.ChoosableItemContentViewData
 import com.qubacy.androidtestitemtouchhelperfordrawingswipebackground._common.component.list.item.hint.SwipeHintView
 
-class ChoosableItemView<ContentViewType, ContentItemDataType : ContentItemData>(
+class ChoosableItemView<ContentViewType, ContentItemDataType : ChoosableItemContentViewData>(
     context: Context,
     attrs: AttributeSet?,
     contentView: ContentViewType
 ) : ConstraintLayout(
     context, attrs
-) where ContentViewType : View, ContentViewType : ContentItemView<ContentItemDataType> {
+) where ContentViewType : View, ContentViewType : ChoosableItemContentView<ContentItemDataType> {
     companion object {
         const val DEFAULT_HINT_GUIDELINE_POSITION = 0.5f
     }
@@ -35,7 +35,7 @@ class ChoosableItemView<ContentViewType, ContentItemDataType : ContentItemData>(
 
     private var mHeightInPx: Float = 0f
 
-    private lateinit var mBinding: ComponentListItemBinding
+    private lateinit var mBinding: ComponentChoosableListItemBinding
 
     val contentView: ContentViewType = contentView
 
@@ -49,19 +49,19 @@ class ChoosableItemView<ContentViewType, ContentItemDataType : ContentItemData>(
         val resources = context.resources
         val leftHintGuidelinePosition =
             ResourcesCompat.getFloat(resources,
-                R.dimen.component_list_item_left_hint_guideline_position
+                R.dimen.component_choosable_list_item_left_hint_guideline_position
             )
 
         mLeftHintGuidelinePosition = leftHintGuidelinePosition
         mRightHintGuidelinePosition = 1 - leftHintGuidelinePosition
 
-        mHeightInPx = resources.getDimension(R.dimen.component_list_item_height)
+        mHeightInPx = resources.getDimension(R.dimen.component_choosable_list_item_height)
     }
 
     private fun inflate(contentView: View) {
         val layoutInflater = LayoutInflater.from(context)
 
-        mBinding = ComponentListItemBinding.inflate(
+        mBinding = ComponentChoosableListItemBinding.inflate(
             layoutInflater, this
         ).apply {
             addView(contentView)
@@ -74,9 +74,9 @@ class ChoosableItemView<ContentViewType, ContentItemDataType : ContentItemData>(
             mHeightInPx.toInt()
         )
 
-        mBinding.componentListItemGuidelineHorizontalHintLeft
+        mBinding.componentChoosableListItemGuidelineHorizontalHintLeft
             .setGuidelinePercent(mLeftHintGuidelinePosition)
-        mBinding.componentListItemGuidelineHorizontalHintRight
+        mBinding.componentChoosableListItemGuidelineHorizontalHintRight
             .setGuidelinePercent(mRightHintGuidelinePosition)
 
         contentView.apply {
@@ -88,20 +88,20 @@ class ChoosableItemView<ContentViewType, ContentItemDataType : ContentItemData>(
     fun resetView() {
         contentView.translationX = 0f
 
-        mBinding.componentListItemBackgroundHintLeft.apply {
+        mBinding.componentChoosableListItemHintLeft.apply {
             if (isInitialized()) resetAnimation()
         }
-        mBinding.componentListItemBackgroundHintRight.apply {
+        mBinding.componentChoosableListItemHintRight.apply {
             if (isInitialized()) resetAnimation()
         }
     }
 
     fun getLeftSwipingHintView(): SwipeHintView {
-        return mBinding.componentListItemBackgroundHintLeft
+        return mBinding.componentChoosableListItemHintLeft
     }
 
     fun getRightSwipingHintView(): SwipeHintView {
-        return mBinding.componentListItemBackgroundHintRight
+        return mBinding.componentChoosableListItemHintRight
     }
 
     fun prepareForSwipeDirection(swipeDirection: SwipeDirection) {

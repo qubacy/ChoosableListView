@@ -2,14 +2,17 @@ package com.qubacy.androidtestitemtouchhelperfordrawingswipebackground.component
 
 import android.content.Context
 import android.view.ViewGroup
-import com.qubacy.androidtestitemtouchhelperfordrawingswipebackground._common.component.list.adapter.producer.ItemViewProducer
+import com.qubacy.androidtestitemtouchhelperfordrawingswipebackground._common.component.list.adapter.producer.ChoosableItemViewProducer
 import com.qubacy.androidtestitemtouchhelperfordrawingswipebackground._common.component.list.item.ChoosableItemView
 import com.qubacy.androidtestitemtouchhelperfordrawingswipebackground.component.list.item.content.StringContentItemView
 import com.qubacy.androidtestitemtouchhelperfordrawingswipebackground.component.list.item.content.data.StringContentItemData
 
 class StringItemViewProducer(
     context: Context
-) : ItemViewProducer<StringContentItemView, StringContentItemData>(context) {
+) : ChoosableItemViewProducer<StringContentItemView, StringContentItemData>(context) {
+    /**
+     * Use createChoosableItemView() to obtain a ChoosableItemView instance;
+     */
     override fun createItemView(
         parent: ViewGroup,
         viewType: Int
