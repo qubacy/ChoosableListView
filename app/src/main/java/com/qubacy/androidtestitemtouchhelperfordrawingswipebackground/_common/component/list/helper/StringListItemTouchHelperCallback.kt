@@ -1,14 +1,12 @@
 package com.qubacy.androidtestitemtouchhelperfordrawingswipebackground._common.component.list.helper
 
 import android.graphics.Canvas
-import android.graphics.Color
 import android.util.Log
 import android.view.View
-import androidx.annotation.ColorInt
 import androidx.annotation.FloatRange
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
+import com.qubacy.androidtestitemtouchhelperfordrawingswipebackground._common.component.list._common.SwipeDirection
 import com.qubacy.androidtestitemtouchhelperfordrawingswipebackground._common.component.list.adapter.ChoosableListAdapter
 import com.qubacy.androidtestitemtouchhelperfordrawingswipebackground._common.component.list.item.ChoosableItemView
 import com.qubacy.androidtestitemtouchhelperfordrawingswipebackground._common.component.list.item.hint.SwipeHintView
@@ -17,19 +15,11 @@ import kotlin.math.abs
 class StringListItemTouchHelperCallback(
     private val mSwipeThreshold: Float = DEFAULT_SWIPE_THRESHOLD,
     private val mHintThreshold: Float = DEFAULT_HINT_THRESHOLD,
-    private val mCallback: Callback,
-    @ColorInt
-    private val mLeftSwipeBackgroundColor: Int = Color.RED,
-    @ColorInt
-    private val mRightSwipeBackgroundColor: Int = Color.GREEN
+    private val mCallback: Callback
 ) : ItemTouchHelper.SimpleCallback(
     0,
     ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT
 ) {
-    enum class SwipeDirection {
-        LEFT, RIGHT;
-    }
-
     interface Callback {
         fun onItemSwiped(direction: SwipeDirection, position: Int)
     }
@@ -87,16 +77,13 @@ class StringListItemTouchHelperCallback(
     }
 
     private fun adjustBackground(
-        itemWrapperView: ConstraintLayout,
+        itemView: ChoosableItemView<*, *>,
         itemHintView: SwipeHintView,
         swipeDirection: SwipeDirection,
         @FloatRange(0.0, 1.0) swipeProgress: Float
     ) {
         adjustBackgroundHint(itemHintView, swipeProgress)
-
-        val backgroundColor = getSwipeBackgroundColorByDirection(swipeDirection)
-
-        itemWrapperView.setBackgroundColor(backgroundColor)
+        itemView.prepareForSwipeDirection(swipeDirection)
     }
 
     private fun adjustBackgroundHint(
@@ -138,14 +125,6 @@ class StringListItemTouchHelperCallback(
         dY: Float
     ): Boolean {
         return (dY == 0f && dX != 0f)
-    }
-
-    @ColorInt
-    private fun getSwipeBackgroundColorByDirection(swipeDirection: SwipeDirection): Int {
-        return when (swipeDirection) {
-            SwipeDirection.RIGHT -> mRightSwipeBackgroundColor
-            SwipeDirection.LEFT -> mLeftSwipeBackgroundColor
-        }
     }
 
     override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {

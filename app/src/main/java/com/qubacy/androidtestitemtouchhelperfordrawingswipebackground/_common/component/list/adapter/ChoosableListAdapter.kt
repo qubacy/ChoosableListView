@@ -1,15 +1,18 @@
 package com.qubacy.androidtestitemtouchhelperfordrawingswipebackground._common.component.list.adapter
 
 import android.view.View
+import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.qubacy.androidtestitemtouchhelperfordrawingswipebackground._common.component.list.adapter.producer.ItemViewProducer
 import com.qubacy.androidtestitemtouchhelperfordrawingswipebackground._common.component.list.item.ChoosableItemView
 import com.qubacy.androidtestitemtouchhelperfordrawingswipebackground._common.component.list.item.content.ContentItemView
 import com.qubacy.androidtestitemtouchhelperfordrawingswipebackground._common.component.list.item.content.data.ContentItemData
 
 abstract class ChoosableListAdapter<
-    ContentItemViewType, ContentItemDataType : ContentItemData
+    ContentItemViewType, ContentItemDataType : ContentItemData,
+    ViewHolderType : ChoosableListAdapter.ChoosableListItemViewHolder<ContentItemViewType, ContentItemDataType>
 >(
-
+    private val mItemViewProducer: ItemViewProducer<ContentItemViewType, ContentItemDataType>
 ) : RecyclerView.Adapter<ChoosableListAdapter.ChoosableListItemViewHolder<
         ContentItemViewType, ContentItemDataType>
 >(
@@ -32,6 +35,19 @@ abstract class ChoosableListAdapter<
     }
 
     private val mItems: MutableList<ContentItemDataType> = mutableListOf()
+
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int
+    ): ChoosableListItemViewHolder<ContentItemViewType, ContentItemDataType> {
+        val itemView = mItemViewProducer.createItemView(parent, viewType)
+
+        return createViewHolder(itemView)
+    }
+
+    protected abstract fun createViewHolder(
+        itemView: ChoosableItemView<ContentItemViewType, ContentItemDataType>
+    ): ViewHolderType
 
     override fun onBindViewHolder(
         holder: ChoosableListItemViewHolder<ContentItemViewType, ContentItemDataType>,

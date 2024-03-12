@@ -4,9 +4,11 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
+import androidx.annotation.ColorInt
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.res.ResourcesCompat
 import com.qubacy.androidtestitemtouchhelperfordrawingswipebackground.R
+import com.qubacy.androidtestitemtouchhelperfordrawingswipebackground._common.component.list._common.SwipeDirection
 import com.qubacy.androidtestitemtouchhelperfordrawingswipebackground.databinding.ComponentListItemBinding
 import com.qubacy.androidtestitemtouchhelperfordrawingswipebackground._common.component.list.item.content.ContentItemView
 import com.qubacy.androidtestitemtouchhelperfordrawingswipebackground._common.component.list.item.content.data.ContentItemData
@@ -22,6 +24,11 @@ class ChoosableItemView<ContentViewType, ContentItemDataType : ContentItemData>(
     companion object {
         const val DEFAULT_HINT_GUIDELINE_POSITION = 0.5f
     }
+
+    @ColorInt
+    private var mLeftSwipeBackgroundColor: Int = 0
+    @ColorInt
+    private var mRightSwipeBackgroundColor: Int = 0
 
     private var mLeftHintGuidelinePosition: Float = DEFAULT_HINT_GUIDELINE_POSITION
     private var mRightHintGuidelinePosition: Float = DEFAULT_HINT_GUIDELINE_POSITION
@@ -95,5 +102,28 @@ class ChoosableItemView<ContentViewType, ContentItemDataType : ContentItemData>(
 
     fun getRightSwipingHintView(): SwipeHintView {
         return mBinding.componentListItemBackgroundHintRight
+    }
+
+    fun prepareForSwipeDirection(swipeDirection: SwipeDirection) {
+        when (swipeDirection) {
+            SwipeDirection.LEFT -> prepareForLeftSwipe()
+            SwipeDirection.RIGHT -> prepareForRightSwipe()
+        }
+    }
+
+    fun setLeftSwipeBackgroundColor(@ColorInt color: Int) {
+        mLeftSwipeBackgroundColor = color
+    }
+
+    fun setRightSwipeBackgroundColor(@ColorInt color: Int) {
+        mRightSwipeBackgroundColor = color
+    }
+
+    private fun prepareForLeftSwipe() {
+        setBackgroundColor(mLeftSwipeBackgroundColor)
+    }
+
+    private fun prepareForRightSwipe() {
+        setBackgroundColor(mRightSwipeBackgroundColor)
     }
 }

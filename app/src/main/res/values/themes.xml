@@ -1,8 +1,18 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="Base.Theme.AndroidTestItemTouchHelperForDrawingSwipeBackground" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="choosableItemViewLeftSwipeBackgrouncColor">?attr/colorErrorContainer</item>
+        <item name="choosableItemViewRightSwipeBackgrouncColor">?attr/colorPrimaryContainer</item>
+
+        <item name="leftSwipeHintViewIcon">@drawable/ic_cross_animated</item>
+        <item name="leftSwipeHintViewIconTint">?attr/colorOnErrorContainer</item>
+        <item name="leftSwipeHintViewText">@string/component_list_item_background_hint_text_swipe_left_text</item>
+        <item name="leftSwipeHintViewTextColor">?attr/colorOnErrorContainer</item>
+
+        <item name="rightSwipeHintViewIcon">@drawable/ic_checkmark_animated</item>
+        <item name="rightSwipeHintViewIconTint">?attr/colorOnPrimaryContainer</item>
+        <item name="rightSwipeHintViewText">@string/component_list_item_background_hint_text_swipe_right_text</item>
+        <item name="rightSwipeHintViewTextColor">?attr/colorOnPrimaryContainer</item>
     </style>
 
     <style name="Theme.AndroidTestItemTouchHelperForDrawingSwipeBackground" parent="Base.Theme.AndroidTestItemTouchHelperForDrawingSwipeBackground" />

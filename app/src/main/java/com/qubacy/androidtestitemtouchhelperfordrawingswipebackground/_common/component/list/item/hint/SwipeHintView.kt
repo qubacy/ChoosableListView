@@ -44,6 +44,20 @@ class SwipeHintView(
         return mBinding != null
     }
 
+    fun setContent(
+        @DrawableRes imageResId: Int = mImageResId,
+        @ColorInt imageColor: Int = mImageColor,
+        text: String = mText,
+        @ColorInt textColor: Int = mTextColor
+    ) {
+        mImageResId = imageResId
+        mImageColor = imageColor
+        mText = text
+        mTextColor = textColor
+
+        if (mBinding != null) initContent()
+    }
+
     fun init(): SwipeHintView {
         if (mBinding != null) throw IllegalStateException()
 
@@ -74,7 +88,7 @@ class SwipeHintView(
             try {
                 mImageResId = getResourceId(0, 0)
                 mImageColor = getColor(1, 0)
-                mText = getString(2)!!
+                mText = getString(2) ?: String()
                 mTextColor = getColor(3, 0)
 
             } finally {

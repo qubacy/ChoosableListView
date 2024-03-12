@@ -2,14 +2,15 @@ package com.qubacy.androidtestitemtouchhelperfordrawingswipebackground
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.animation.AccelerateInterpolator
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.divider.MaterialDividerItemDecoration
+import com.qubacy.androidtestitemtouchhelperfordrawingswipebackground._common.component.list._common.SwipeDirection
 import com.qubacy.androidtestitemtouchhelperfordrawingswipebackground.databinding.ActivityMainBinding
 import com.qubacy.androidtestitemtouchhelperfordrawingswipebackground._common.component.list.animator.SmoothListItemAnimator
 import com.qubacy.androidtestitemtouchhelperfordrawingswipebackground.component.list.adapter.StringListAdapter
 import com.qubacy.androidtestitemtouchhelperfordrawingswipebackground._common.component.list.helper.StringListItemTouchHelperCallback
+import com.qubacy.androidtestitemtouchhelperfordrawingswipebackground.component.list.adapter.producer.StringItemViewProducer
 import com.qubacy.androidtestitemtouchhelperfordrawingswipebackground.component.list.item.content.data.StringContentItemData
 import com.qubacy.androidtestitemtouchhelperfordrawingswipebackground.util.resolveColorAttr
 
@@ -50,7 +51,9 @@ class MainActivity : AppCompatActivity(), StringListItemTouchHelperCallback.Call
     }
 
     private fun initListAdapter(items: List<StringContentItemData>): StringListAdapter {
-        return StringListAdapter().apply {
+        val itemProducer = StringItemViewProducer(this)
+
+        return StringListAdapter(itemProducer).apply {
             setItems(items)
         }
     }
@@ -72,15 +75,8 @@ class MainActivity : AppCompatActivity(), StringListItemTouchHelperCallback.Call
     }
 
     private fun initListItemTouchHelper(listView: RecyclerView) {
-        val leftSwipeBackgroundColor = theme
-            .resolveColorAttr(com.google.android.material.R.attr.colorErrorContainer)
-        val rightSwipeBackgroundColor = theme
-            .resolveColorAttr(com.google.android.material.R.attr.colorPrimaryContainer)
-
         val itemTouchHelperCallback = StringListItemTouchHelperCallback(
-            mCallback = this,
-            mLeftSwipeBackgroundColor = leftSwipeBackgroundColor,
-            mRightSwipeBackgroundColor = rightSwipeBackgroundColor
+            mCallback = this
         )
         val itemTouchHelper = ItemTouchHelper(itemTouchHelperCallback)
 
@@ -92,7 +88,7 @@ class MainActivity : AppCompatActivity(), StringListItemTouchHelperCallback.Call
     }
 
     override fun onItemSwiped(
-        direction: StringListItemTouchHelperCallback.SwipeDirection,
+        direction: SwipeDirection,
         position: Int
     ) {
         mAdapter.removeItemAtPosition(position)
