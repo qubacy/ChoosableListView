@@ -79,7 +79,16 @@ class SmoothListItemAnimator(
             alpha = 0f
         }
 
-        val onEndAction = { dispatchAddFinished(holder) }
+        val onEndAction = {
+            dispatchAddFinished(holder)
+
+            holder.itemView.apply {
+                translationX = 0f
+                alpha = 1f
+            }
+
+            Unit
+        }
 
         holder.itemView.animate().apply {
             translationX(0f)
@@ -108,7 +117,11 @@ class SmoothListItemAnimator(
         }
 
         val startAction = { dispatchMoveStarting(holder) }
-        val endAction = { dispatchMoveFinished(holder) }
+        val endAction = {
+            dispatchMoveFinished(holder)
+
+            holder.itemView.translationY = 0f
+        }
 
         holder.itemView.animate().apply {
             translationY(0f)

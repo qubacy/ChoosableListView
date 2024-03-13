@@ -2,6 +2,7 @@ package com.qubacy.choosablelistview.component.list.item.content
 
 import android.content.Context
 import android.util.AttributeSet
+import android.util.Log
 import android.widget.FrameLayout
 import androidx.core.view.setPadding
 import com.google.android.material.textview.MaterialTextView
@@ -14,6 +15,8 @@ class StringContentItemView(
     attrs: AttributeSet?
 ) : FrameLayout(context, attrs), ChoosableItemContentView<StringContentItemData> {
     companion object {
+        const val TAG = "StringContentItemView"
+
         const val DEFAULT_PADDING_PX = 20
     }
 
