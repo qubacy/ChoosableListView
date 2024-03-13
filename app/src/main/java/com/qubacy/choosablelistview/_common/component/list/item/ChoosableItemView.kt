@@ -2,6 +2,7 @@ package com.qubacy.choosablelistview._common.component.list.item
 
 import android.content.Context
 import android.util.AttributeSet
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import androidx.annotation.ColorInt
@@ -24,6 +25,8 @@ class ChoosableItemView<ContentViewType, ContentItemDataType : ChoosableItemCont
     context, attrs
 ) where ContentViewType : View, ContentViewType : ChoosableItemContentView<ContentItemDataType> {
     companion object {
+        const val TAG = "ChoosableItemView"
+
         const val DEFAULT_HINT_GUIDELINE_POSITION = 0.5f
     }
 
@@ -63,12 +66,10 @@ class ChoosableItemView<ContentViewType, ContentItemDataType : ChoosableItemCont
     private fun inflate(contentView: View, divider: MaterialDivider? = null) {
         val layoutInflater = LayoutInflater.from(context)
 
-        mBinding = ComponentChoosableListItemBinding.inflate(
-            layoutInflater, this
-        ).apply {
-            addView(contentView)
-            addView(divider)
-        }
+        mBinding = ComponentChoosableListItemBinding.inflate(layoutInflater, this)
+
+        addView(contentView)
+        addView(divider)
     }
 
     private fun initLayoutParams(contentView: View, divider: MaterialDivider? = null) {

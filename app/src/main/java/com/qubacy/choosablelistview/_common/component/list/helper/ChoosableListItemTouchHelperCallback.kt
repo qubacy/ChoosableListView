@@ -1,6 +1,8 @@
 package com.qubacy.choosablelistview._common.component.list.helper
 
+import android.graphics.Bitmap
 import android.graphics.Canvas
+import android.graphics.Rect
 import android.util.Log
 import android.view.View
 import androidx.annotation.FloatRange
@@ -73,7 +75,7 @@ class ChoosableListItemTouchHelperCallback(
             adjustBackground(itemView, hintView, swipeDirection, swipeProgress)
         }
 
-        drawItem(c, itemView.contentView, dX)
+        drawItemContent(c, itemView, itemView.contentView, dX)
     }
 
     private fun adjustBackground(
@@ -109,15 +111,30 @@ class ChoosableListItemTouchHelperCallback(
         itemViewHolder.choosableItemView.resetView()
     }
 
-    private fun drawItem(
+    private fun drawItemContent(
         c: Canvas,
         itemView: View,
+        itemContentView: View,
         dX: Float
     ) {
-        itemView.apply {
-            translationX = dX
-            draw(c)
-        }
+        itemContentView.translationX = dX
+
+        val itemViewRect = Rect(itemView.left, itemView.top, itemView.right, itemView.bottom)
+        val itemContentBitmap =
+            Bitmap.createBitmap(
+                itemViewRect.width(),
+                itemViewRect.height(),
+                Bitmap.Config.ARGB_8888
+            )
+        val itemContentCanvas = Canvas(itemContentBitmap)
+
+        itemContentView.draw(itemContentCanvas)
+        c.drawBitmap(
+            itemContentBitmap,
+            itemViewRect.left.toFloat() + dX,
+            itemViewRect.top.toFloat(),
+            null
+        )
     }
 
     private fun isHorizontalSwipe(
