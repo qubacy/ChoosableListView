@@ -66,7 +66,8 @@ class ChoosableItemView<ContentViewType, ContentItemDataType : ChoosableItemCont
         mBinding = ComponentChoosableListItemBinding.inflate(layoutInflater, this)
 
         addView(contentView)
-        addView(divider)
+
+        if (divider != null) addView(divider)
     }
 
     private fun initLayoutParams(contentView: View, divider: MaterialDivider? = null) {
@@ -91,6 +92,9 @@ class ChoosableItemView<ContentViewType, ContentItemDataType : ChoosableItemCont
     }
 
     fun resetView() {
+        scaleY = 1f
+        translationY = 0f
+
         contentView.translationX = 0f
 
         mBinding.componentChoosableListItemHintLeft.apply {

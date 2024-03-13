@@ -57,8 +57,6 @@ class SmoothListItemAnimator(
             Log.d(TAG, "animateRemove(): onEndAction entering..")
 
             dispatchRemoveFinished(holder)
-
-            holder.itemView.scaleY = 1f
         }
 
         holder.itemView.animate().apply {
@@ -117,11 +115,7 @@ class SmoothListItemAnimator(
         }
 
         val startAction = { dispatchMoveStarting(holder) }
-        val endAction = {
-            dispatchMoveFinished(holder)
-
-            holder.itemView.translationY = 0f
-        }
+        val endAction = { dispatchMoveFinished(holder) }
 
         holder.itemView.animate().apply {
             translationY(0f)
