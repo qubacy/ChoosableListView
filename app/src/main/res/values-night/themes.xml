@@ -1,7 +1,24 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="Base.Theme.ChoosableListView" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your dark theme here. -->
-        <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
+        <item name="choosableListItemLeftSwipeBackgroundColor">?attr/colorErrorContainer</item>
+        <item name="choosableListItemRightSwipeBackgroundColor">?attr/colorPrimaryContainer</item>
+
+        <item name="choosableListItemLeftSwipeHintViewIcon">@drawable/ic_cross_animated</item>
+        <item name="choosableListItemLeftSwipeHintViewIconTint">?attr/colorOnErrorContainer</item>
+        <item name="choosableListItemLeftSwipeHintViewText">@string/component_choosable_list_item_hint_text_swipe_left_text</item>
+        <item name="choosableListItemLeftSwipeHintViewTextColor">?attr/colorOnErrorContainer</item>
+
+        <item name="choosableListItemRightSwipeHintViewIcon">@drawable/ic_checkmark_animated</item>
+        <item name="choosableListItemRightSwipeHintViewIconTint">?attr/colorOnPrimaryContainer</item>
+        <item name="choosableListItemRightSwipeHintViewText">@string/component_choosable_list_item_hint_text_swipe_right_text</item>
+        <item name="choosableListItemRightSwipeHintViewTextColor">?attr/colorOnPrimaryContainer</item>
+
+        <item name="choosableListItemHintIconAnimationDuration">150</item>
+
+        <item name="choosableListItemHeight">100dp</item>
+        <item name="choosableListItemHintThreshold">@fraction/choosable_list_item_hint_threshold</item>
+        <item name="choosableListItemLeftHintGuidelinePosition">@fraction/choosable_list_item_hint_threshold</item>
+        <item name="choosableListItemLeftHintIconSize">48dp</item>
     </style>
 </resources>

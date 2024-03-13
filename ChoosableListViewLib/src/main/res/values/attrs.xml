@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="SwipeHintView">
+        <attr name="swipeHintViewImage" format="reference"/>
+        <attr name="swipeHintViewImageColor" format="color"/>
+        <attr name="swipeHintViewText" format="string"/>
+        <attr name="swipeHintViewTextColor" format="color"/>
+    </declare-styleable>
+
+    <attr name="choosableListItemLeftSwipeBackgroundColor" format="color"/>
+    <attr name="choosableListItemRightSwipeBackgroundColor" format="color"/>
+
+    <attr name="choosableListItemLeftSwipeHintViewIcon" format="reference"/>
+    <attr name="choosableListItemLeftSwipeHintViewIconTint" format="color"/>
+    <attr name="choosableListItemLeftSwipeHintViewText" format="string"/>
+    <attr name="choosableListItemLeftSwipeHintViewTextColor" format="color"/>
+
+    <attr name="choosableListItemRightSwipeHintViewIcon" format="reference"/>
+    <attr name="choosableListItemRightSwipeHintViewIconTint" format="color"/>
+    <attr name="choosableListItemRightSwipeHintViewText" format="string"/>
+    <attr name="choosableListItemRightSwipeHintViewTextColor" format="color"/>
+
+    <attr name="choosableListItemHintIconAnimationDuration" format="integer"/>
+
+    <attr name="choosableListItemHeight" format="dimension"/>
+    <attr name="choosableListItemHintThreshold" format="fraction"/>
+    <attr name="choosableListItemLeftHintGuidelinePosition" format="fraction"/>
+    <attr name="choosableListItemLeftHintIconSize" format="dimension"/>
+</resources>

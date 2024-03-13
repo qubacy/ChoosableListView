@@ -4,11 +4,11 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
-import com.qubacy.choosablelistview._common.component.list._common.SwipeDirection
+import com.qubacy.choosablelistviewlib._common.direction.SwipeDirection
 import com.qubacy.choosablelistview.databinding.ActivityMainBinding
-import com.qubacy.choosablelistview._common.component.list.animator.SmoothListItemAnimator
+import com.qubacy.choosablelistviewlib.animator.SmoothListItemAnimator
 import com.qubacy.choosablelistview.component.list.adapter.StringListAdapter
-import com.qubacy.choosablelistview._common.component.list.helper.ChoosableListItemTouchHelperCallback
+import com.qubacy.choosablelistviewlib.helper.ChoosableListItemTouchHelperCallback
 import com.qubacy.choosablelistview.component.list.adapter.producer.StringItemViewProducer
 import com.qubacy.choosablelistview.component.list.item.content.data.StringContentItemData
 
@@ -64,9 +64,10 @@ class MainActivity : AppCompatActivity(), ChoosableListItemTouchHelperCallback.C
     }
 
     private fun initListItemTouchHelper(listView: RecyclerView) {
-        val itemTouchHelperCallback = ChoosableListItemTouchHelperCallback(
-            mCallback = this
-        )
+        val itemTouchHelperCallback =
+            ChoosableListItemTouchHelperCallback(
+                mCallback = this
+            )
         val itemTouchHelper = ItemTouchHelper(itemTouchHelperCallback)
 
         itemTouchHelper.attachToRecyclerView(listView)

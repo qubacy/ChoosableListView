@@ -6,14 +6,15 @@ import android.util.Log
 import android.widget.FrameLayout
 import androidx.core.view.setPadding
 import com.google.android.material.textview.MaterialTextView
-import com.qubacy.choosablelistview._common.component.list.item.content.ChoosableItemContentView
+import com.qubacy.choosablelistviewlib.item.content.ChoosableItemContentView
 import com.qubacy.choosablelistview.component.list.item.content.data.StringContentItemData
-import com.qubacy.choosablelistview.util.resolveColorAttr
+import com.qubacy.choosablelistviewlib._common.util.resolveColorAttr
 
 class StringContentItemView(
     context: Context,
     attrs: AttributeSet?
-) : FrameLayout(context, attrs), ChoosableItemContentView<StringContentItemData> {
+) : FrameLayout(context, attrs),
+    ChoosableItemContentView<StringContentItemData> {
     companion object {
         const val TAG = "StringContentItemView"
 

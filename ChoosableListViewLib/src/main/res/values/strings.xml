@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="component_choosable_list_item_hint_text_swipe_right_text">Accept</string>
+    <string name="component_choosable_list_item_hint_text_swipe_left_text">Decline</string>
+</resources>

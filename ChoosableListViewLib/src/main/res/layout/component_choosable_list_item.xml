@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/component_choosable_list_item_guideline_horizontal_hint_left"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/component_choosable_list_item_guideline_horizontal_hint_right"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5"/>
+
+    <com.qubacy.choosablelistviewlib.item.hint.SwipeHintView
+        android:id="@+id/component_choosable_list_item_hint_left"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/component_choosable_list_item_guideline_horizontal_hint_left"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        app:swipeHintViewImage="@drawable/ic_cross_animated"
+        app:swipeHintViewImageColor="?attr/colorOnErrorContainer"
+        app:swipeHintViewText="@string/component_choosable_list_item_hint_text_swipe_left_text"
+        app:swipeHintViewTextColor="?attr/colorOnErrorContainer"/>
+
+    <com.qubacy.choosablelistviewlib.item.hint.SwipeHintView
+        android:id="@+id/component_choosable_list_item_hint_right"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/component_choosable_list_item_guideline_horizontal_hint_right"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        app:swipeHintViewImage="@drawable/ic_checkmark_animated"
+        app:swipeHintViewImageColor="?attr/colorOnPrimaryContainer"
+        app:swipeHintViewText="@string/component_choosable_list_item_hint_text_swipe_right_text"
+        app:swipeHintViewTextColor="?attr/colorOnPrimaryContainer"/>
+
+</merge>

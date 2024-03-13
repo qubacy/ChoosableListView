@@ -13,6 +13,13 @@
         <item name="choosableListItemRightSwipeHintViewIconTint">?attr/colorOnPrimaryContainer</item>
         <item name="choosableListItemRightSwipeHintViewText">@string/component_choosable_list_item_hint_text_swipe_right_text</item>
         <item name="choosableListItemRightSwipeHintViewTextColor">?attr/colorOnPrimaryContainer</item>
+
+        <item name="choosableListItemHintIconAnimationDuration">150</item>
+
+        <item name="choosableListItemHeight">100dp</item>
+        <item name="choosableListItemHintThreshold">@fraction/choosable_list_item_hint_threshold</item>
+        <item name="choosableListItemLeftHintGuidelinePosition">@fraction/choosable_list_item_hint_threshold</item>
+        <item name="choosableListItemLeftHintIconSize">48dp</item>
     </style>
 
     <style name="Theme.ChoosableListView" parent="Base.Theme.ChoosableListView" />

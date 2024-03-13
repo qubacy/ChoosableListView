@@ -1,10 +1,10 @@
 package com.qubacy.choosablelistview.component.list.adapter
 
-import com.qubacy.choosablelistview._common.component.list.adapter.ChoosableListAdapter
-import com.qubacy.choosablelistview._common.component.list.item.ChoosableItemView
+import com.qubacy.choosablelistviewlib.item.ChoosableItemView
 import com.qubacy.choosablelistview.component.list.adapter.producer.StringItemViewProducer
 import com.qubacy.choosablelistview.component.list.item.content.StringContentItemView
 import com.qubacy.choosablelistview.component.list.item.content.data.StringContentItemData
+import com.qubacy.choosablelistviewlib.adapter.ChoosableListAdapter
 
 class StringListAdapter(
     itemViewProducer: StringItemViewProducer

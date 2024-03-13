@@ -3,8 +3,8 @@ package com.qubacy.choosablelistview.component.list.adapter.producer
 import android.content.Context
 import android.view.ViewGroup
 import com.google.android.material.divider.MaterialDivider
-import com.qubacy.choosablelistview._common.component.list.adapter.producer.ChoosableItemViewProducer
-import com.qubacy.choosablelistview._common.component.list.item.ChoosableItemView
+import com.qubacy.choosablelistviewlib.adapter.producer.ChoosableItemViewProducer
+import com.qubacy.choosablelistviewlib.item.ChoosableItemView
 import com.qubacy.choosablelistview.component.list.item.content.StringContentItemView
 import com.qubacy.choosablelistview.component.list.item.content.data.StringContentItemData
 

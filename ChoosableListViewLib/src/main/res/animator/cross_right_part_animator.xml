@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<set
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <objectAnimator
+        android:propertyName="pathData"
+        android:duration="?attr/choosableListItemHintIconAnimationDuration"
+        android:interpolator="@android:anim/accelerate_interpolator"
+        android:valueType="pathType"
+        android:valueFrom="M49.3,-0.2L59.2,9.7L57,11.9L47,2.1Z"
+        android:valueTo="M49.3,-0.2L59.2,9.7L9.7,59.2L-0.2,49.3Z"/>
+</set>
+

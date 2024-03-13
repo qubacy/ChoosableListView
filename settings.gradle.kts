@@ -15,4 +15,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "ChoosableListView"
 include(":app")
- 
+include(":ChoosableListViewLib")
