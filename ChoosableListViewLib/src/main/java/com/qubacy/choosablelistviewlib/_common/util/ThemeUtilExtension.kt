@@ -16,6 +16,15 @@ fun Theme.resolveColorAttr(@AttrRes colorAttr: Int): Int {
     return typedValue.data
 }
 
+fun Theme.resolveIntegerAttr(@AttrRes integerAttr: Int): Int {
+    val typedValue = TypedValue()
+
+    if (!resolveAttribute(integerAttr, typedValue, true))
+        throw IllegalArgumentException()
+
+    return typedValue.data
+}
+
 fun Theme.resolveFractionAttr(@AttrRes fractionAttr: Int): Float {
     val typedValue = TypedValue()
 

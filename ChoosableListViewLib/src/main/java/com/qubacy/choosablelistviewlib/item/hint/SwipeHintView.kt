@@ -16,7 +16,7 @@ import com.qubacy.choosablelistviewlib.databinding.ComponentChoosableListItemHin
 
 class SwipeHintView(
     context: Context,
-    attrs: AttributeSet
+    attrs: AttributeSet?
 ) : LinearLayout(context, attrs) {
     companion object {
         const val TAG = "SwipeHintView"
@@ -36,7 +36,8 @@ class SwipeHintView(
     private var mTextColor: Int = 0
 
     init {
-        initAttrs(attrs)
+        if (attrs != null) initAttrs(attrs)
+
         initLayoutParams()
     }
 
