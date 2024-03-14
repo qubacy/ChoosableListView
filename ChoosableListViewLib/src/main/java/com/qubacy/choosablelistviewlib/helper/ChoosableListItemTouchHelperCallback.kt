@@ -59,7 +59,9 @@ class ChoosableListItemTouchHelperCallback(
         actionState: Int,
         isCurrentlyActive: Boolean
     ) {
-        val itemView = viewHolder.itemView as ChoosableItemView<*, *>
+        val choosableViewHolder =
+            (viewHolder as ChoosableListAdapter.ChoosableListItemViewHolder<*, *>)
+        val itemView = choosableViewHolder.choosableItemView
 
         if (isHorizontalSwipe(dX, dY)) {
             val swipeDirection = getSwipeDirectionByDeltaX(dX)
@@ -119,14 +121,9 @@ class ChoosableListItemTouchHelperCallback(
     ) {
         itemContentView.translationX = dX
 
-        val itemViewRect = Rect(itemView.left, itemView.top, itemView.right, itemView.bottom)
-        val itemContentBitmap =
-            Bitmap.createBitmap(
-                itemViewRect.width(),
-                itemViewRect.height(),
-                Bitmap.Config.ARGB_8888
-            )
-        val itemContentCanvas = Canvas(itemContentBitmap)
+        val itemViewRect = createItemViewRect(itemView)
+        val itemContentBitmap = createItemContentBitmap(itemViewRect)
+        val itemContentCanvas = createItemContentCanvas(itemViewRect)
 
         itemContentView.draw(itemContentCanvas)
         c.drawBitmap(
@@ -135,6 +132,29 @@ class ChoosableListItemTouchHelperCallback(
             itemViewRect.top.toFloat(),
             null
         )
+    }
+
+    open fun createItemViewRect(itemView: View): Rect {
+        return Rect(itemView.left, itemView.top, itemView.right, itemView.bottom)
+    }
+
+    open fun createItemContentBitmap(itemViewRect: Rect): Bitmap {
+        return Bitmap.createBitmap(
+            itemViewRect.width(),
+            itemViewRect.height(),
+            Bitmap.Config.ARGB_8888
+        )
+    }
+
+    open fun createItemContentCanvas(itemViewRect: Rect): Canvas {
+        val itemContentBitmap =
+            Bitmap.createBitmap(
+                itemViewRect.width(),
+                itemViewRect.height(),
+                Bitmap.Config.ARGB_8888
+            )
+
+        return Canvas(itemContentBitmap)
     }
 
     private fun isHorizontalSwipe(

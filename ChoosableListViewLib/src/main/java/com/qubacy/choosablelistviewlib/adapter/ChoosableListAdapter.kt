@@ -26,7 +26,7 @@ abstract class ChoosableListAdapter<
     abstract class ChoosableListItemViewHolder<
         ContentViewType, ContentItemDataType : ChoosableItemContentViewData
     >(
-        val choosableItemView: ChoosableItemView<ContentViewType, ContentItemDataType>
+        open val choosableItemView: ChoosableItemView<ContentViewType, ContentItemDataType>
     ) : RecyclerView.ViewHolder(
         choosableItemView
     ) where ContentViewType : View, ContentViewType : ChoosableItemContentView<ContentItemDataType> {
