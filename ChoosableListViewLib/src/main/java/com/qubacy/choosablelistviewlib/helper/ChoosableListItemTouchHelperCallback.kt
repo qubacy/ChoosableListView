@@ -15,8 +15,8 @@ import com.qubacy.choosablelistviewlib.item.hint.SwipeHintView
 import kotlin.math.abs
 
 class ChoosableListItemTouchHelperCallback(
-    private val mSwipeThreshold: Float = DEFAULT_SWIPE_THRESHOLD,
-    private val mHintThreshold: Float = DEFAULT_HINT_THRESHOLD,
+    val swipeThreshold: Float = DEFAULT_SWIPE_THRESHOLD,
+    val hintThreshold: Float = DEFAULT_HINT_THRESHOLD,
     private val mCallback: Callback
 ) : ItemTouchHelper.SimpleCallback(
     0,
@@ -29,12 +29,12 @@ class ChoosableListItemTouchHelperCallback(
     companion object {
         const val TAG = "ChItemTouchHelperClback"
 
-        const val DEFAULT_SWIPE_THRESHOLD = 0.5f
-        const val DEFAULT_HINT_THRESHOLD = 0.6f
+        const val DEFAULT_SWIPE_THRESHOLD = 0.6f
+        const val DEFAULT_HINT_THRESHOLD = 0.5f
     }
 
     init {
-        if (mHintThreshold <= mSwipeThreshold)
+        if (hintThreshold > swipeThreshold)
             throw IllegalArgumentException()
     }
 
@@ -47,7 +47,7 @@ class ChoosableListItemTouchHelperCallback(
     }
 
     override fun getSwipeThreshold(viewHolder: RecyclerView.ViewHolder): Float {
-        return mSwipeThreshold
+        return swipeThreshold
     }
 
     override fun onChildDraw(
@@ -92,10 +92,10 @@ class ChoosableListItemTouchHelperCallback(
         itemHintView: SwipeHintView,
         @FloatRange(0.0, 1.0) swipeProgress: Float
     ) {
-        if (swipeProgress < mSwipeThreshold) return itemHintView.resetAnimation()
+        if (swipeProgress < hintThreshold) return itemHintView.resetAnimation()
 
-        val mappedSwipeProgress = (swipeProgress - mSwipeThreshold) *
-                (1f / abs(mHintThreshold - mSwipeThreshold))
+        val mappedSwipeProgress = (swipeProgress - hintThreshold) *
+                (1f / abs(hintThreshold - swipeThreshold))
         val preparedSwipeProcess = if (mappedSwipeProgress > 1f) 1f else mappedSwipeProgress
 
         itemHintView.animateWithProgress(preparedSwipeProcess)
