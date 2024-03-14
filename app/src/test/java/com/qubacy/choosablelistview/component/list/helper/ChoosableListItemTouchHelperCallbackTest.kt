@@ -1,16 +1,19 @@
 package com.qubacy.choosablelistview.component.list.helper
 
+import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.Rect
+import android.view.View
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.qubacy.choosablelistview.component.list.adapter._common._test.util.mock.AnyMockUtil
-import com.qubacy.choosablelistview.component.list.item.content.StringContentItemView
 import com.qubacy.choosablelistviewlib._common.direction.SwipeDirection
 import com.qubacy.choosablelistviewlib.adapter.ChoosableListAdapter
 import com.qubacy.choosablelistviewlib.helper.ChoosableListItemTouchHelperCallback
 import com.qubacy.choosablelistviewlib.item.ChoosableItemView
+import com.qubacy.choosablelistviewlib.item.content.ChoosableItemContentView
+import com.qubacy.choosablelistviewlib.item.content.data.ChoosableItemContentViewData
 import com.qubacy.choosablelistviewlib.item.hint.SwipeHintView
 import org.junit.After
 import org.junit.Assert
@@ -19,6 +22,13 @@ import org.junit.Test
 import org.mockito.Mockito
 
 class ChoosableListItemTouchHelperCallbackTest {
+    class TestContentItemViewData : ChoosableItemContentViewData { }
+    class TestContentItemView(
+        context: Context
+    ) : ChoosableItemContentView<TestContentItemViewData>, View(context) {
+        override fun setData(contentItemData: TestContentItemViewData) { }
+    }
+
     companion object {
         const val DEFAULT_ITEM_VIEW_WIDTH = 100
     }
@@ -148,8 +158,7 @@ class ChoosableListItemTouchHelperCallbackTest {
             Unit
         }
 
-        // todo: how to mock with a base class and an interface?:
-        val itemContentViewMock = Mockito.mock(StringContentItemView::class.java)
+        val itemContentViewMock = Mockito.mock(TestContentItemView::class.java)
 
         Mockito.`when`(itemContentViewMock.draw(AnyMockUtil.anyObject()))
             .thenAnswer {  }
