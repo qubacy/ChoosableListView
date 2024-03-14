@@ -1,4 +1,4 @@
-package com.qubacy.choosablelistview.animator
+package com.qubacy.choosablelistview.component.list.animator
 
 import android.content.Context
 import android.view.View

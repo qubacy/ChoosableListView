@@ -13,7 +13,7 @@ abstract class ChoosableListAdapter<
     ContentItemViewType, ContentItemDataType : ChoosableItemContentViewData,
     ViewHolderType : ChoosableListAdapter.ChoosableListItemViewHolder<ContentItemViewType, ContentItemDataType>
 >(
-    private val mItemViewProducer: ChoosableItemViewProducer<ContentItemViewType, ContentItemDataType>
+    val itemViewProducer: ChoosableItemViewProducer<ContentItemViewType, ContentItemDataType>
 ) : RecyclerView.Adapter<ChoosableListAdapter.ChoosableListItemViewHolder<
         ContentItemViewType, ContentItemDataType>
 >(
@@ -41,12 +41,12 @@ abstract class ChoosableListAdapter<
         parent: ViewGroup,
         viewType: Int
     ): ChoosableListItemViewHolder<ContentItemViewType, ContentItemDataType> {
-        val itemView = mItemViewProducer.createItemView(parent, viewType)
+        val itemView = itemViewProducer.createItemView(parent, viewType)
 
         return createViewHolder(itemView)
     }
 
-    protected abstract fun createViewHolder(
+    abstract fun createViewHolder(
         itemView: ChoosableItemView<ContentItemViewType, ContentItemDataType>
     ): ViewHolderType
 
@@ -67,14 +67,14 @@ abstract class ChoosableListAdapter<
     fun removeItemAtPosition(position: Int) {
         mItems.removeAt(position)
 
-        notifyItemRemoved(position)
+        wrappedNotifyItemRemoved(position)
     }
 
     @UiThread
     fun addItem(item: ContentItemDataType) {
         mItems.add(item)
 
-        notifyItemInserted(mItems.size - 1)
+        wrappedNotifyItemInserted(mItems.size - 1)
     }
 
     @UiThread
@@ -84,6 +84,18 @@ abstract class ChoosableListAdapter<
             addAll(items)
         }
 
+        wrappedNotifyDataSetChanged()
+    }
+
+    open fun wrappedNotifyItemRemoved(position: Int) {
+        notifyItemRemoved(position)
+    }
+
+    open fun wrappedNotifyItemInserted(position: Int) {
+        notifyItemInserted(position)
+    }
+
+    open fun wrappedNotifyDataSetChanged() {
         notifyDataSetChanged()
     }
 }
