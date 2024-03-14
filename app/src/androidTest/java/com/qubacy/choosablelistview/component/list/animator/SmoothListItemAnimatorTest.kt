@@ -12,6 +12,7 @@ import androidx.test.espresso.matcher.ViewMatchers.withText
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.qubacy.choosablelistview.MainActivity
+import com.qubacy.choosablelistview._common._test.activity.scenario.util.getContext
 import com.qubacy.choosablelistview._common._test.view.util.action.wait.WaitViewAction
 import com.qubacy.choosablelistview._common._test.view.util.matcher.position.TranslationViewMatcher
 import com.qubacy.choosablelistview._common._test.view.util.matcher.scale.ScaleViewMatcher
@@ -47,11 +48,8 @@ class SmoothListItemAnimatorTest {
 
     @Before
     fun setup() {
-        var activityContext: Context? = null
-
-        activityScenarioRule.scenario.onActivity { activityContext = it }
-
-        val itemView = createItemView(activityContext!!)
+        val activityContext = activityScenarioRule.scenario.getContext()
+        val itemView = createItemView(activityContext)
 
         activityScenarioRule.scenario.onActivity {
             it.setContentView(itemView)
