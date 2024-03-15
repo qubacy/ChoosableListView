@@ -78,4 +78,4 @@ The following noticeable libraries & frameworks are in use in the app:
 
 ## Contributors
 
-The library was fully made by Semyon Dzukaev in 2024. All rights reserved.
+The library was fully made by Semyon Dzukaev in 2024.
