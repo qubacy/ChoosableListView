@@ -16,7 +16,7 @@
 ## Description
 Feel free to use this tiny library to implement a RecyclerView-based list with choosable items. By choosable, I mean it can be swiped aside (Right or Left) to trigger a specific action. As the main feature, in the process of swiping, the user will be provided with dynamically inflated hints (an icon with a caption under it).
 
-![Preview GIF](./assets/gifs/preview.gif)
+![Preview GIF](./assets/gif/preview.gif)
 
 ## System Requirements
 
