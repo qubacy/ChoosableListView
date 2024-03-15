@@ -19,6 +19,6 @@
         <item name="choosableListItemHeight">100dp</item>
         <item name="choosableListItemHintThreshold">@fraction/choosable_list_item_hint_threshold</item>
         <item name="choosableListItemLeftHintGuidelinePosition">@fraction/choosable_list_item_hint_threshold</item>
-        <item name="choosableListItemLeftHintIconSize">48dp</item>
+        <item name="choosableListItemHintIconSize">48dp</item>
     </style>
 </resources>
