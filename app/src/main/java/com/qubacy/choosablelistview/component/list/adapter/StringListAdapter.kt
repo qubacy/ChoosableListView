@@ -1,6 +1,6 @@
 package com.qubacy.choosablelistview.component.list.adapter
 
-import com.qubacy.choosablelistviewlib.item.ChoosableItemView
+import com.qubacy.choosablelistviewlib.item.ChoosableItemViewProvider
 import com.qubacy.choosablelistview.component.list.adapter.producer.StringItemViewProducer
 import com.qubacy.choosablelistview.component.list.item.content.StringContentItemView
 import com.qubacy.choosablelistview.component.list.item.content.data.StringContentItemData
@@ -9,7 +9,8 @@ import com.qubacy.choosablelistviewlib.adapter.ChoosableListAdapter
 class StringListAdapter(
     itemViewProducer: StringItemViewProducer
 ) : ChoosableListAdapter<
-    StringContentItemView, StringContentItemData,
+    StringContentItemData,
+    StringContentItemView,
     StringListAdapter.StringListItemViewHolder
 >(itemViewProducer) {
     companion object {
@@ -17,13 +18,13 @@ class StringListAdapter(
     }
 
     class StringListItemViewHolder(
-        itemView: ChoosableItemView<StringContentItemView, StringContentItemData>
-    ) : ChoosableListItemViewHolder<StringContentItemView, StringContentItemData>(itemView) {
+        itemView: ChoosableItemViewProvider<StringContentItemData, StringContentItemView>
+    ) : ChoosableListItemViewHolder<StringContentItemData, StringContentItemView>(itemView) {
 
     }
 
     override fun createViewHolder(
-        itemView: ChoosableItemView<StringContentItemView, StringContentItemData>
+        itemView: ChoosableItemViewProvider<StringContentItemData, StringContentItemView>
     ): StringListItemViewHolder {
         return StringListItemViewHolder(itemView)
     }

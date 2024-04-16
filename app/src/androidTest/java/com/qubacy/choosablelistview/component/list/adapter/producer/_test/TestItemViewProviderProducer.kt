@@ -4,16 +4,16 @@ import android.content.Context
 import android.view.ViewGroup
 import com.qubacy.choosablelistview.component.list.item.content._test.TestItemContentView
 import com.qubacy.choosablelistview.component.list.item.content.data._test.TestItemContentViewData
-import com.qubacy.choosablelistviewlib.adapter.producer.ChoosableItemViewProducer
-import com.qubacy.choosablelistviewlib.item.ChoosableItemView
+import com.qubacy.choosablelistviewlib.adapter.producer.ChoosableItemViewProviderProducer
+import com.qubacy.choosablelistviewlib.item.ChoosableItemViewProvider
 
-class TestItemViewProducer(
+class TestItemViewProviderProducer(
     context: Context
-) : ChoosableItemViewProducer<TestItemContentView, TestItemContentViewData>(context) {
+) : ChoosableItemViewProviderProducer<TestItemContentViewData, TestItemContentView>(context) {
     override fun createItemView(
         parent: ViewGroup,
         viewType: Int
-    ): ChoosableItemView<TestItemContentView, TestItemContentViewData> {
+    ): ChoosableItemViewProvider<TestItemContentViewData, TestItemContentView> {
         val contentItemView = TestItemContentView(parent.context)
         val itemView = createChoosableItemView(parent, contentItemView)
 

@@ -2,11 +2,11 @@ package com.qubacy.choosablelistview.component.list.item.content
 
 import android.content.Context
 import android.util.AttributeSet
-import android.util.Log
+import android.view.View
 import android.widget.FrameLayout
 import androidx.core.view.setPadding
 import com.google.android.material.textview.MaterialTextView
-import com.qubacy.choosablelistviewlib.item.content.ChoosableItemContentView
+import com.qubacy.choosablelistviewlib.item.content.ChoosableItemContentViewProvider
 import com.qubacy.choosablelistview.component.list.item.content.data.StringContentItemData
 import com.qubacy.choosablelistviewlib._common.util.resolveColorAttr
 
@@ -14,7 +14,7 @@ class StringContentItemView(
     context: Context,
     attrs: AttributeSet?
 ) : FrameLayout(context, attrs),
-    ChoosableItemContentView<StringContentItemData> {
+    ChoosableItemContentViewProvider<StringContentItemData> {
     companion object {
         const val TAG = "StringContentItemView"
 
@@ -44,5 +44,9 @@ class StringContentItemView(
             .resolveColorAttr(com.google.android.material.R.attr.colorSurface)
 
         setBackgroundColor(backgroundColor)
+    }
+
+    override fun getView(): View {
+        return this
     }
 }

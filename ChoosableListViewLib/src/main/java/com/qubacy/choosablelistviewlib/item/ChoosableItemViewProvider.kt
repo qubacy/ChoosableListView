@@ -12,18 +12,21 @@ import com.qubacy.choosablelistviewlib._common.direction.SwipeDirection
 import com.qubacy.choosablelistviewlib._common.util.resolveDimenAttr
 import com.qubacy.choosablelistviewlib._common.util.resolveFractionAttr
 import com.qubacy.choosablelistviewlib.databinding.ComponentChoosableListItemBinding
-import com.qubacy.choosablelistviewlib.item.content.ChoosableItemContentView
+import com.qubacy.choosablelistviewlib.item.content.ChoosableItemContentViewProvider
 import com.qubacy.choosablelistviewlib.item.content.data.ChoosableItemContentViewData
 import com.qubacy.choosablelistviewlib.item.hint.SwipeHintView
 
-class ChoosableItemView<ContentViewType, ContentItemDataType : ChoosableItemContentViewData>(
+class ChoosableItemViewProvider<
+    ContentItemDataType : ChoosableItemContentViewData,
+    ContentViewProviderType : ChoosableItemContentViewProvider<ContentItemDataType>
+>(
     context: Context,
     attrs: AttributeSet?,
-    contentView: ContentViewType,
+    contentViewProvider: ContentViewProviderType,
     divider: MaterialDivider? = null
 ) : ConstraintLayout(
     context, attrs
-) where ContentViewType : View, ContentViewType : ChoosableItemContentView<ContentItemDataType> {
+), ChoosableItemContentViewProvider<ContentItemDataType> {
     companion object {
         const val TAG = "ChoosableItemView"
 
@@ -42,12 +45,12 @@ class ChoosableItemView<ContentViewType, ContentItemDataType : ChoosableItemCont
 
     private lateinit var mBinding: ComponentChoosableListItemBinding
 
-    val contentView: ContentViewType = contentView
+    val contentViewProvider: ContentViewProviderType = contentViewProvider
 
     init {
         initValues()
-        inflate(contentView, divider)
-        initLayoutParams(contentView)
+        inflate(contentViewProvider.getView(), divider)
+        initLayoutParams(contentViewProvider.getView())
     }
 
     private fun initValues() {
@@ -95,7 +98,7 @@ class ChoosableItemView<ContentViewType, ContentItemDataType : ChoosableItemCont
         scaleY = 1f
         translationY = 0f
 
-        contentView.translationX = 0f
+        contentViewProvider.getView().translationX = 0f
 
         mBinding.componentChoosableListItemHintLeft.apply {
             if (isInitialized()) resetAnimation()
@@ -134,5 +137,13 @@ class ChoosableItemView<ContentViewType, ContentItemDataType : ChoosableItemCont
 
     private fun prepareForRightSwipe() {
         setBackgroundColor(mRightSwipeBackgroundColor)
+    }
+
+    override fun setData(contentItemData: ContentItemDataType) {
+        contentViewProvider.setData(contentItemData)
+    }
+
+    override fun getView(): View {
+        return this
     }
 }

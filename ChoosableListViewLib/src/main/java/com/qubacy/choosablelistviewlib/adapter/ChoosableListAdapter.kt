@@ -1,37 +1,38 @@
 package com.qubacy.choosablelistviewlib.adapter
 
-import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.UiThread
 import androidx.recyclerview.widget.RecyclerView
-import com.qubacy.choosablelistviewlib.adapter.producer.ChoosableItemViewProducer
-import com.qubacy.choosablelistviewlib.item.ChoosableItemView
-import com.qubacy.choosablelistviewlib.item.content.ChoosableItemContentView
+import com.qubacy.choosablelistviewlib.adapter.producer.ChoosableItemViewProviderProducer
+import com.qubacy.choosablelistviewlib.item.ChoosableItemViewProvider
+import com.qubacy.choosablelistviewlib.item.content.ChoosableItemContentViewProvider
 import com.qubacy.choosablelistviewlib.item.content.data.ChoosableItemContentViewData
 
 abstract class ChoosableListAdapter<
-    ContentItemViewType, ContentItemDataType : ChoosableItemContentViewData,
-    ViewHolderType : ChoosableListAdapter.ChoosableListItemViewHolder<ContentItemViewType, ContentItemDataType>
+    ContentItemDataType : ChoosableItemContentViewData,
+    ContentItemViewProviderType : ChoosableItemContentViewProvider<ContentItemDataType>,
+    ViewHolderType : ChoosableListAdapter.ChoosableListItemViewHolder<ContentItemDataType, ContentItemViewProviderType>
 >(
-    val itemViewProducer: ChoosableItemViewProducer<ContentItemViewType, ContentItemDataType>
+    val itemViewProducer: ChoosableItemViewProviderProducer<ContentItemDataType, ContentItemViewProviderType>
 ) : RecyclerView.Adapter<ChoosableListAdapter.ChoosableListItemViewHolder<
-        ContentItemViewType, ContentItemDataType>
->(
+    ContentItemDataType, ContentItemViewProviderType
+>>(
 
-) where ContentItemViewType : ChoosableItemContentView<ContentItemDataType>, ContentItemViewType : View {
+) {
     companion object {
         const val TAG = "ChoosableListAdapter"
     }
 
     abstract class ChoosableListItemViewHolder<
-        ContentViewType, ContentItemDataType : ChoosableItemContentViewData
+        ContentItemDataType : ChoosableItemContentViewData,
+        ContentViewProviderType : ChoosableItemContentViewProvider<ContentItemDataType>
     >(
-        open val choosableItemView: ChoosableItemView<ContentViewType, ContentItemDataType>
+        open val choosableItemView: ChoosableItemViewProvider<ContentItemDataType, ContentViewProviderType>
     ) : RecyclerView.ViewHolder(
         choosableItemView
-    ) where ContentViewType : View, ContentViewType : ChoosableItemContentView<ContentItemDataType> {
+    ) {
         fun setData(contentItemData: ContentItemDataType) {
-            choosableItemView.contentView.setData(contentItemData)
+            choosableItemView.contentViewProvider.setData(contentItemData)
         }
     }
 
@@ -40,18 +41,18 @@ abstract class ChoosableListAdapter<
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): ChoosableListItemViewHolder<ContentItemViewType, ContentItemDataType> {
+    ): ChoosableListItemViewHolder<ContentItemDataType, ContentItemViewProviderType> {
         val itemView = itemViewProducer.createItemView(parent, viewType)
 
         return createViewHolder(itemView)
     }
 
     abstract fun createViewHolder(
-        itemView: ChoosableItemView<ContentItemViewType, ContentItemDataType>
+        itemView: ChoosableItemViewProvider<ContentItemDataType, ContentItemViewProviderType>
     ): ViewHolderType
 
     override fun onBindViewHolder(
-        holder: ChoosableListItemViewHolder<ContentItemViewType, ContentItemDataType>,
+        holder: ChoosableListItemViewHolder<ContentItemDataType, ContentItemViewProviderType>,
         position: Int
     ) {
         val item = mItems[position]

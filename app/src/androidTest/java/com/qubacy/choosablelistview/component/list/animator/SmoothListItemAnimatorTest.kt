@@ -20,7 +20,7 @@ import com.qubacy.choosablelistview.component.list.adapter.StringListAdapter
 import com.qubacy.choosablelistview.component.list.item.content.StringContentItemView
 import com.qubacy.choosablelistview.component.list.item.content.data.StringContentItemData
 import com.qubacy.choosablelistviewlib.animator.SmoothListItemAnimator
-import com.qubacy.choosablelistviewlib.item.ChoosableItemView
+import com.qubacy.choosablelistviewlib.item.ChoosableItemViewProvider
 import org.hamcrest.Matcher
 import org.hamcrest.Matchers
 import org.junit.Assert
@@ -64,18 +64,18 @@ class SmoothListItemAnimatorTest {
 
     private fun createItemView(
         context: Context
-    ): ChoosableItemView<StringContentItemView, StringContentItemData> {
+    ): ChoosableItemViewProvider<StringContentItemData, StringContentItemView> {
         val itemContentView = StringContentItemView(context, null)
 
-        return ChoosableItemView(
+        return ChoosableItemViewProvider(
             context = context,
             attrs = null,
-            contentView = itemContentView
+            contentViewProvider = itemContentView
         )
     }
 
     private fun createViewHolder(
-        itemView: ChoosableItemView<StringContentItemView, StringContentItemData>,
+        itemView: ChoosableItemViewProvider<StringContentItemData, StringContentItemView>,
         itemData: StringContentItemData
     ): StringListAdapter.StringListItemViewHolder {
         val viewHolder = StringListAdapter.StringListItemViewHolder(itemView)
@@ -167,7 +167,7 @@ class SmoothListItemAnimatorTest {
     private fun getItemMatcher(): Matcher<View> {
         return Matchers.allOf(
             hasDescendant(withText(mItemTestData.text)),
-            isAssignableFrom(ChoosableItemView::class.java)
+            isAssignableFrom(ChoosableItemViewProvider::class.java)
         )
     }
 }

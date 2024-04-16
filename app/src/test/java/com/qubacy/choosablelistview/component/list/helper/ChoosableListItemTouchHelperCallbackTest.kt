@@ -10,7 +10,7 @@ import com.qubacy.choosablelistview.component.list.item.content._test.TestItemCo
 import com.qubacy.choosablelistviewlib._common.direction.SwipeDirection
 import com.qubacy.choosablelistviewlib.adapter.ChoosableListAdapter
 import com.qubacy.choosablelistviewlib.helper.ChoosableListItemTouchHelperCallback
-import com.qubacy.choosablelistviewlib.item.ChoosableItemView
+import com.qubacy.choosablelistviewlib.item.ChoosableItemViewProvider
 import com.qubacy.choosablelistviewlib.item.hint.SwipeHintView
 import org.junit.After
 import org.junit.Assert
@@ -150,12 +150,13 @@ class ChoosableListItemTouchHelperCallbackTest {
 
         val itemContentViewMock = Mockito.mock(TestItemContentView::class.java)
 
-        Mockito.`when`(itemContentViewMock.draw(AnyMockUtil.anyObject()))
-            .thenAnswer {  }
+        Mockito.`when`(itemContentViewMock.draw(AnyMockUtil.anyObject())).thenAnswer {  }
+        Mockito.`when`(itemContentViewMock.getView()).thenAnswer { itemContentViewMock }
 
-        val itemViewMock = Mockito.mock(ChoosableItemView::class.java)
+        val itemViewMock = Mockito.mock(ChoosableItemViewProvider::class.java)
 
-        Mockito.`when`(itemViewMock.contentView).thenReturn(itemContentViewMock)
+        Mockito.`when`(itemViewMock.contentViewProvider).thenReturn(itemContentViewMock)
+        Mockito.`when`(itemViewMock.getView()).thenReturn(itemContentViewMock)
         Mockito.`when`(itemViewMock.measuredWidth).thenAnswer { mItemViewWidth }
         Mockito.`when`(itemViewMock.getLeftSwipingHintView()).thenReturn(leftSwipingHintView)
         Mockito.`when`(itemViewMock.getRightSwipingHintView()).thenReturn(rightSwipingHintView)

@@ -1,25 +1,25 @@
 package com.qubacy.choosablelistviewlib.adapter.producer
 
 import android.content.Context
-import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.ColorInt
 import androidx.annotation.DrawableRes
 import com.google.android.material.divider.MaterialDivider
 import com.qubacy.choosablelistviewlib.R
-import com.qubacy.choosablelistviewlib.item.ChoosableItemView
-import com.qubacy.choosablelistviewlib.item.content.ChoosableItemContentView
+import com.qubacy.choosablelistviewlib.item.ChoosableItemViewProvider
 import com.qubacy.choosablelistviewlib.item.content.data.ChoosableItemContentViewData
 import com.qubacy.choosablelistviewlib.item.hint.SwipeHintView
 import com.qubacy.choosablelistviewlib._common.util.resolveColorAttr
 import com.qubacy.choosablelistviewlib._common.util.resolveDrawableAttr
 import com.qubacy.choosablelistviewlib._common.util.resolveStringAttr
+import com.qubacy.choosablelistviewlib.item.content.ChoosableItemContentViewProvider
 
-abstract class ChoosableItemViewProducer<
-    ContentViewType, ContentItemDataType : ChoosableItemContentViewData
+abstract class ChoosableItemViewProviderProducer<
+    ContentItemDataType : ChoosableItemContentViewData,
+    ContentViewProviderType : ChoosableItemContentViewProvider<ContentItemDataType>
 >(
     context: Context
-) where ContentViewType : View, ContentViewType : ChoosableItemContentView<ContentItemDataType> {
+) {
     @DrawableRes
     private var mLeftSwipeIcon: Int = 0
     @DrawableRes
@@ -62,14 +62,16 @@ abstract class ChoosableItemViewProducer<
 
     abstract fun createItemView(
         parent: ViewGroup, viewType: Int
-    ): ChoosableItemView<ContentViewType, ContentItemDataType>
+    ): ChoosableItemViewProvider<ContentItemDataType, ContentViewProviderType>
 
     protected fun createChoosableItemView(
-        parent: ViewGroup, contentItemView: ContentViewType
-    ): ChoosableItemView<ContentViewType, ContentItemDataType> {
+        parent: ViewGroup, contentItemViewProvider: ContentViewProviderType
+    ): ChoosableItemViewProvider<ContentItemDataType, ContentViewProviderType> {
         val divider = createDivider(parent.context)
 
-        return ChoosableItemView(parent.context, null, contentItemView, divider).apply {
+        return ChoosableItemViewProvider<ContentItemDataType, ContentViewProviderType>(
+            parent.context, null, contentItemViewProvider, divider
+        ).apply {
             setLeftHintContent(getLeftSwipingHintView())
             setRightHintContent(getRightSwipingHintView())
 

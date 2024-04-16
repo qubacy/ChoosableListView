@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.qubacy.choosablelistviewlib._common.direction.SwipeDirection
 import com.qubacy.choosablelistviewlib.adapter.ChoosableListAdapter
-import com.qubacy.choosablelistviewlib.item.ChoosableItemView
+import com.qubacy.choosablelistviewlib.item.ChoosableItemViewProvider
 import com.qubacy.choosablelistviewlib.item.hint.SwipeHintView
 import kotlin.math.abs
 
@@ -77,11 +77,11 @@ class ChoosableListItemTouchHelperCallback(
             adjustBackground(itemView, hintView, swipeDirection, swipeProgress)
         }
 
-        drawItemContent(c, itemView, itemView.contentView, dX)
+        drawItemContent(c, itemView, itemView.contentViewProvider.getView(), dX)
     }
 
     private fun adjustBackground(
-        itemView: ChoosableItemView<*, *>,
+        itemView: ChoosableItemViewProvider<*, *>,
         itemHintView: SwipeHintView,
         swipeDirection: SwipeDirection,
         @FloatRange(0.0, 1.0) swipeProgress: Float

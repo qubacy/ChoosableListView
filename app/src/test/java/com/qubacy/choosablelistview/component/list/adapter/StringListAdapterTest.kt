@@ -5,7 +5,7 @@ import com.qubacy.choosablelistview.component.list.adapter._common._test.util.mo
 import com.qubacy.choosablelistview.component.list.adapter.producer.StringItemViewProducer
 import com.qubacy.choosablelistview.component.list.item.content.data.StringContentItemData
 import com.qubacy.choosablelistviewlib.adapter.ChoosableListAdapter
-import com.qubacy.choosablelistviewlib.item.ChoosableItemView
+import com.qubacy.choosablelistviewlib.item.ChoosableItemViewProvider
 import org.junit.After
 import org.junit.Assert
 import org.junit.Before
@@ -70,7 +70,7 @@ class StringListAdapterTest {
             .thenAnswer {
                 mCreateItemViewCallFlag.set(true)
 
-                Mockito.mock(ChoosableItemView::class.java)
+                Mockito.mock(ChoosableItemViewProvider::class.java)
             }
 
         val adapterSpy = Mockito.spy(StringListAdapter(itemViewProducer))

@@ -1,7 +1,6 @@
 package com.qubacy.choosablelistview.component.list.item
 
 import android.graphics.drawable.ColorDrawable
-import android.graphics.drawable.Drawable
 import androidx.test.espresso.Espresso
 import androidx.test.espresso.assertion.ViewAssertions
 import androidx.test.espresso.matcher.ViewMatchers
@@ -13,12 +12,11 @@ import com.qubacy.choosablelistview._common._test.view.util.matcher.position.Tra
 import com.qubacy.choosablelistview._common._test.view.util.matcher.scale.ScaleViewMatcher
 import com.qubacy.choosablelistview.component.list.item.content._test.TestItemContentView
 import com.qubacy.choosablelistview.component.list.item.content.data._test.TestItemContentViewData
-import com.qubacy.choosablelistviewlib.item.ChoosableItemView
+import com.qubacy.choosablelistviewlib.item.ChoosableItemViewProvider
 import com.qubacy.choosablelistview.R
 import com.qubacy.choosablelistview._common._test.view.util.matcher.background.BackgroundViewMatcher
 import com.qubacy.choosablelistviewlib._common.direction.SwipeDirection
 import org.hamcrest.Matchers
-import org.junit.Assert
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -29,7 +27,7 @@ class ChoosableItemViewTest {
     @get:Rule
     val activityScenarioRule = ActivityScenarioRule(MainActivity::class.java)
 
-    private lateinit var mItemView: ChoosableItemView<TestItemContentView, TestItemContentViewData>
+    private lateinit var mItemView: ChoosableItemViewProvider<TestItemContentViewData, TestItemContentView>
 
     @Before
     fun setup() {
@@ -41,7 +39,7 @@ class ChoosableItemViewTest {
         val context = activityScenarioRule.scenario.getContext()
         val itemContentView = TestItemContentView(context)
 
-        mItemView = ChoosableItemView(context, null, itemContentView)
+        mItemView = ChoosableItemViewProvider(context, null, itemContentView)
     }
 
     private fun prepareActivity() {
@@ -65,11 +63,11 @@ class ChoosableItemViewTest {
                 scaleY = startScale
                 translationY = startTranslationY.toFloat()
 
-                contentView.translationX = startContentTranslationX.toFloat()
+                contentViewProvider.translationX = startContentTranslationX.toFloat()
             }
         }
 
-        Espresso.onView(ViewMatchers.isAssignableFrom(ChoosableItemView::class.java))
+        Espresso.onView(ViewMatchers.isAssignableFrom(ChoosableItemViewProvider::class.java))
             .check(ViewAssertions.matches(
                 Matchers.allOf(
                     ScaleViewMatcher(scaleY = startScale),
@@ -85,7 +83,7 @@ class ChoosableItemViewTest {
             mItemView.resetView()
         }
 
-        Espresso.onView(ViewMatchers.isAssignableFrom(ChoosableItemView::class.java))
+        Espresso.onView(ViewMatchers.isAssignableFrom(ChoosableItemViewProvider::class.java))
             .check(ViewAssertions.matches(
                 Matchers.allOf(
                     ScaleViewMatcher(scaleY = expectedEndScale),
@@ -116,14 +114,14 @@ class ChoosableItemViewTest {
             mItemView.prepareForSwipeDirection(SwipeDirection.RIGHT)
         }
 
-        Espresso.onView(ViewMatchers.isAssignableFrom(ChoosableItemView::class.java))
+        Espresso.onView(ViewMatchers.isAssignableFrom(ChoosableItemViewProvider::class.java))
             .check(ViewAssertions.matches(BackgroundViewMatcher(expectedRightSwipeBackground)))
 
         activityScenarioRule.scenario.onActivity {
             mItemView.prepareForSwipeDirection(SwipeDirection.LEFT)
         }
 
-        Espresso.onView(ViewMatchers.isAssignableFrom(ChoosableItemView::class.java))
+        Espresso.onView(ViewMatchers.isAssignableFrom(ChoosableItemViewProvider::class.java))
             .check(ViewAssertions.matches(BackgroundViewMatcher(expectedLeftSwipeBackground)))
     }
 }

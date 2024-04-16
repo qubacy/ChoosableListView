@@ -11,9 +11,9 @@ import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.qubacy.choosablelistview.MainActivity
 import com.qubacy.choosablelistview._common._test.activity.scenario.util.getContext
-import com.qubacy.choosablelistview.component.list.adapter.producer._test.TestItemViewProducer
+import com.qubacy.choosablelistview.component.list.adapter.producer._test.TestItemViewProviderProducer
 import com.qubacy.choosablelistview.component.list.item.content._test.TestItemContentView
-import com.qubacy.choosablelistviewlib.item.ChoosableItemView
+import com.qubacy.choosablelistviewlib.item.ChoosableItemViewProvider
 import org.hamcrest.Matchers
 import org.junit.Before
 import org.junit.Rule
@@ -27,7 +27,7 @@ class ChoosableItemViewProducerTest {
     val activityScenarioRule = ActivityScenarioRule(MainActivity::class.java)
 
     private lateinit var mContentView: ViewGroup
-    private lateinit var mProducer: TestItemViewProducer
+    private lateinit var mProducer: TestItemViewProviderProducer
 
     @Before
     fun setup() {
@@ -49,7 +49,7 @@ class ChoosableItemViewProducerTest {
     }
 
     private fun initProducer(context: Context) {
-        mProducer = TestItemViewProducer(context)
+        mProducer = TestItemViewProviderProducer(context)
     }
 
     @Test
@@ -64,7 +64,7 @@ class ChoosableItemViewProducerTest {
         }
 
         Espresso.onView(Matchers.allOf(
-            ViewMatchers.isAssignableFrom(ChoosableItemView::class.java),
+            ViewMatchers.isAssignableFrom(ChoosableItemViewProvider::class.java),
             ViewMatchers.hasDescendant(
                 ViewMatchers.isAssignableFrom(TestItemContentView::class.java)
             )
