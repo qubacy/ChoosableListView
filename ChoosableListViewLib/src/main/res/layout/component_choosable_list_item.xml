@@ -29,7 +29,8 @@
         app:swipeHintViewImage="@drawable/ic_cross_animated"
         app:swipeHintViewImageColor="?attr/colorOnErrorContainer"
         app:swipeHintViewText="@string/component_choosable_list_item_hint_text_swipe_left_text"
-        app:swipeHintViewTextColor="?attr/colorOnErrorContainer"/>
+        app:swipeHintViewTextColor="?attr/colorOnErrorContainer"
+        app:swipeHintViewIconSize="48dp"/>
 
     <com.qubacy.choosablelistviewlib.item.hint.SwipeHintView
         android:id="@+id/component_choosable_list_item_hint_right"
@@ -43,6 +44,7 @@
         app:swipeHintViewImage="@drawable/ic_checkmark_animated"
         app:swipeHintViewImageColor="?attr/colorOnPrimaryContainer"
         app:swipeHintViewText="@string/component_choosable_list_item_hint_text_swipe_right_text"
-        app:swipeHintViewTextColor="?attr/colorOnPrimaryContainer"/>
+        app:swipeHintViewTextColor="?attr/colorOnPrimaryContainer"
+        app:swipeHintViewIconSize="48dp"/>
 
 </merge>

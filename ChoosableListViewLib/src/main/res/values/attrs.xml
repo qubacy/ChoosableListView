@@ -5,6 +5,7 @@
         <attr name="swipeHintViewImageColor" format="color"/>
         <attr name="swipeHintViewText" format="string"/>
         <attr name="swipeHintViewTextColor" format="color"/>
+        <attr name="swipeHintViewIconSize" format="dimension"/>
     </declare-styleable>
 
     <attr name="choosableListItemLeftSwipeBackgroundColor" format="color"/>

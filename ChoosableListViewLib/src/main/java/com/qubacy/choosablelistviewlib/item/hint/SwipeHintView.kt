@@ -10,6 +10,7 @@ import androidx.annotation.ColorInt
 import androidx.annotation.DrawableRes
 import androidx.annotation.FloatRange
 import androidx.core.graphics.drawable.DrawableCompat
+import androidx.core.view.updateLayoutParams
 import androidx.vectordrawable.graphics.drawable.AnimatedVectorDrawableCompat
 import com.qubacy.choosablelistviewlib.R
 import com.qubacy.choosablelistviewlib.databinding.ComponentChoosableListItemHintBinding
@@ -34,6 +35,7 @@ class SwipeHintView(
     private lateinit var mText: String
     @ColorInt
     private var mTextColor: Int = 0
+    private var mIconSize: Int = 0
 
     init {
         if (attrs != null) initAttrs(attrs)
@@ -49,12 +51,14 @@ class SwipeHintView(
         @DrawableRes iconResId: Int = mIconResId,
         @ColorInt iconTint: Int = mIconTint,
         text: String = mText,
-        @ColorInt textColor: Int = mTextColor
+        @ColorInt textColor: Int = mTextColor,
+        iconSize: Int = mIconSize
     ) {
         mIconResId = iconResId
         mIconTint = iconTint
         mText = text
         mTextColor = textColor
+        mIconSize = iconSize
 
         if (mBinding != null) initContent()
     }
@@ -83,7 +87,8 @@ class SwipeHintView(
                 R.attr.swipeHintViewImage,
                 R.attr.swipeHintViewImageColor,
                 R.attr.swipeHintViewText,
-                R.attr.swipeHintViewTextColor
+                R.attr.swipeHintViewTextColor,
+                R.attr.swipeHintViewIconSize
             )
         ).apply {
             try {
@@ -91,6 +96,7 @@ class SwipeHintView(
                 mIconTint = getColor(1, 0)
                 mText = getString(2) ?: String()
                 mTextColor = getColor(3, 0)
+                mIconSize = getDimension(4, 0f).toInt()
 
             } finally {
                 recycle()
@@ -117,6 +123,10 @@ class SwipeHintView(
             alpha = 0f
 
             componentListItemHintIcon.setImageDrawable(mAnimatedImage)
+            componentListItemHintIcon.updateLayoutParams<LayoutParams> {
+                width = mIconSize
+                height = mIconSize
+            }
             componentListItemHintText.setTextColor(mTextColor)
             componentListItemHintText.text = mText
         }

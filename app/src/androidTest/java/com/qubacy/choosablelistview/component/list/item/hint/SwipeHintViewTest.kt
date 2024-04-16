@@ -31,6 +31,7 @@ class SwipeHintViewTest {
     @DrawableRes
     private var mInitImageRes: Int = 0
     private var mInitText: String = String()
+    private var mInitIconSize: Int = 0
 
     private lateinit var mSwipeHintView: SwipeHintView
 
@@ -38,6 +39,7 @@ class SwipeHintViewTest {
     fun setup() {
         mInitImageRes = R.drawable.ic_checkmark_animated
         mInitText = "test text"
+        mInitIconSize = 48
 
         initSwipeHintView()
         initContent()
@@ -57,7 +59,8 @@ class SwipeHintViewTest {
                 mInitImageRes,
                 com.qubacy.choosablelistview.R.color.black,
                 mInitText,
-                com.qubacy.choosablelistview.R.color.black
+                com.qubacy.choosablelistview.R.color.black,
+                mInitIconSize
             )
         }
     }

@@ -10,6 +10,7 @@ import com.qubacy.choosablelistviewlib.item.ChoosableItemViewProvider
 import com.qubacy.choosablelistviewlib.item.content.data.ChoosableItemContentViewData
 import com.qubacy.choosablelistviewlib.item.hint.SwipeHintView
 import com.qubacy.choosablelistviewlib._common.util.resolveColorAttr
+import com.qubacy.choosablelistviewlib._common.util.resolveDimenAttr
 import com.qubacy.choosablelistviewlib._common.util.resolveDrawableAttr
 import com.qubacy.choosablelistviewlib._common.util.resolveStringAttr
 import com.qubacy.choosablelistviewlib.item.content.ChoosableItemContentViewProvider
@@ -40,6 +41,8 @@ abstract class ChoosableItemViewProviderProducer<
     @ColorInt
     private var mRightSwipeBackgroundColor: Int = 0
 
+    private var mHintIconSize: Int = 0
+
     init {
         initValues(context)
     }
@@ -58,6 +61,8 @@ abstract class ChoosableItemViewProviderProducer<
             .resolveColorAttr(R.attr.choosableListItemLeftSwipeBackgroundColor)
         mRightSwipeBackgroundColor = context.theme
             .resolveColorAttr(R.attr.choosableListItemRightSwipeBackgroundColor)
+
+        mHintIconSize = context.theme.resolveDimenAttr(R.attr.choosableListItemHintIconSize)!!.toInt()
     }
 
     abstract fun createItemView(
@@ -86,11 +91,11 @@ abstract class ChoosableItemViewProviderProducer<
 
     protected fun setLeftHintContent(leftHintView: SwipeHintView) {
         leftHintView.setContent(
-            mLeftSwipeIcon, mLeftSwipeIconColor, mLeftSwipeText, mLeftSwipeTextColor)
+            mLeftSwipeIcon, mLeftSwipeIconColor, mLeftSwipeText, mLeftSwipeTextColor, mHintIconSize)
     }
 
     protected fun setRightHintContent(leftHintView: SwipeHintView) {
         leftHintView.setContent(
-            mRightSwipeIcon, mRightSwipeIconColor, mRightSwipeText, mRightSwipeTextColor)
+            mRightSwipeIcon, mRightSwipeIconColor, mRightSwipeText, mRightSwipeTextColor, mHintIconSize)
     }
 }
