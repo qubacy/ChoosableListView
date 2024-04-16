@@ -4,6 +4,7 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import androidx.annotation.ColorInt
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.google.android.material.divider.MaterialDivider
@@ -41,7 +42,7 @@ class ChoosableItemViewProvider<
     private var mLeftHintGuidelinePosition: Float = DEFAULT_HINT_GUIDELINE_POSITION
     private var mRightHintGuidelinePosition: Float = DEFAULT_HINT_GUIDELINE_POSITION
 
-    private var mHeightInPx: Float = 0f
+    private var mHeightInPx: Float? = null
 
     private lateinit var mBinding: ComponentChoosableListItemBinding
 
@@ -76,7 +77,7 @@ class ChoosableItemViewProvider<
     private fun initLayoutParams(contentView: View, divider: MaterialDivider? = null) {
         layoutParams = LayoutParams(
             LayoutParams.MATCH_PARENT,
-            mHeightInPx.toInt()
+            mHeightInPx?.toInt() ?: LayoutParams.WRAP_CONTENT
         )
 
         mBinding.componentChoosableListItemGuidelineHorizontalHintLeft

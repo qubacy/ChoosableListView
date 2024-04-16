@@ -3,6 +3,7 @@ package com.qubacy.choosablelistview.component.list.item.content
 import android.content.Context
 import android.util.AttributeSet
 import android.view.View
+import android.view.ViewGroup
 import android.widget.FrameLayout
 import androidx.core.view.setPadding
 import com.google.android.material.textview.MaterialTextView
@@ -31,6 +32,8 @@ class StringContentItemView(
     }
 
     private fun initLayout() {
+        layoutParams = LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT)
+
         addView(mTextView)
         setPadding(DEFAULT_PADDING_PX)
     }

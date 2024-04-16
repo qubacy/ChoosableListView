@@ -34,11 +34,11 @@ fun Theme.resolveFractionAttr(@AttrRes fractionAttr: Int): Float {
     return typedValue.float
 }
 
-fun Theme.resolveDimenAttr(@AttrRes dimenAttr: Int): Float {
+fun Theme.resolveDimenAttr(@AttrRes dimenAttr: Int): Float? {
     val typedValue = TypedValue()
 
     if (!resolveAttribute(dimenAttr, typedValue, true))
-        throw IllegalArgumentException()
+        return null
 
     return typedValue.getDimension(resources.displayMetrics)
 }

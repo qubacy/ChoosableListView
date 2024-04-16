@@ -21,6 +21,7 @@
     <attr name="choosableListItemRightSwipeHintViewTextColor" format="color"/>
 
     <attr name="choosableListItemHintIconAnimationDuration" format="integer"/>
+    <attr name="choosableListItemHintVerticalMargin" format="dimension"/>
 
     <attr name="choosableListItemHeight" format="dimension"/>
     <attr name="choosableListItemHintThreshold" format="fraction"/>
