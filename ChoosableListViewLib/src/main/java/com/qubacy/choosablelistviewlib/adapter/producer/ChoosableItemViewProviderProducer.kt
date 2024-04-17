@@ -7,20 +7,24 @@ import androidx.annotation.DrawableRes
 import com.google.android.material.divider.MaterialDivider
 import com.qubacy.choosablelistviewlib.R
 import com.qubacy.choosablelistviewlib.item.ChoosableItemViewProvider
-import com.qubacy.choosablelistviewlib.item.content.data.ChoosableItemContentViewData
 import com.qubacy.choosablelistviewlib.item.hint.SwipeHintView
 import com.qubacy.choosablelistviewlib._common.util.resolveColorAttr
 import com.qubacy.choosablelistviewlib._common.util.resolveDimenAttr
 import com.qubacy.choosablelistviewlib._common.util.resolveDrawableAttr
 import com.qubacy.choosablelistviewlib._common.util.resolveStringAttr
-import com.qubacy.choosablelistviewlib.item.content.ChoosableItemContentViewProvider
+import com.qubacy.utility.baserecyclerview.adapter.producer.BaseRecyclerViewItemViewProviderProducer
+import com.qubacy.utility.baserecyclerview.item.BaseRecyclerViewItemViewProvider
+import com.qubacy.utility.baserecyclerview.item.data.BaseRecyclerViewItemData
 
 abstract class ChoosableItemViewProviderProducer<
-    ContentItemDataType : ChoosableItemContentViewData,
-    ContentViewProviderType : ChoosableItemContentViewProvider<ContentItemDataType>
+    ContentItemDataType : BaseRecyclerViewItemData,
+    ContentItemViewProviderType: BaseRecyclerViewItemViewProvider<ContentItemDataType>
 >(
     context: Context
-) {
+) : BaseRecyclerViewItemViewProviderProducer<
+    ContentItemDataType,
+    ChoosableItemViewProvider<ContentItemDataType, ContentItemViewProviderType>
+>() {
     @DrawableRes
     private var mLeftSwipeIcon: Int = 0
     @DrawableRes
@@ -65,16 +69,12 @@ abstract class ChoosableItemViewProviderProducer<
         mHintIconSize = context.theme.resolveDimenAttr(R.attr.choosableListItemHintIconSize)!!.toInt()
     }
 
-    abstract fun createItemView(
-        parent: ViewGroup, viewType: Int
-    ): ChoosableItemViewProvider<ContentItemDataType, ContentViewProviderType>
-
     protected fun createChoosableItemView(
-        parent: ViewGroup, contentItemViewProvider: ContentViewProviderType
-    ): ChoosableItemViewProvider<ContentItemDataType, ContentViewProviderType> {
+        parent: ViewGroup, contentItemViewProvider: ContentItemViewProviderType
+    ): ChoosableItemViewProvider<ContentItemDataType, ContentItemViewProviderType> {
         val divider = createDivider(parent.context)
 
-        return ChoosableItemViewProvider<ContentItemDataType, ContentViewProviderType>(
+        return ChoosableItemViewProvider(
             parent.context, null, contentItemViewProvider, divider
         ).apply {
             setLeftHintContent(getLeftSwipingHintView())

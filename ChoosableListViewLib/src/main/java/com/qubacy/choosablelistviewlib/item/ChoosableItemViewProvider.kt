@@ -4,7 +4,6 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.annotation.ColorInt
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.google.android.material.divider.MaterialDivider
@@ -13,13 +12,13 @@ import com.qubacy.choosablelistviewlib._common.direction.SwipeDirection
 import com.qubacy.choosablelistviewlib._common.util.resolveDimenAttr
 import com.qubacy.choosablelistviewlib._common.util.resolveFractionAttr
 import com.qubacy.choosablelistviewlib.databinding.ComponentChoosableListItemBinding
-import com.qubacy.choosablelistviewlib.item.content.ChoosableItemContentViewProvider
-import com.qubacy.choosablelistviewlib.item.content.data.ChoosableItemContentViewData
 import com.qubacy.choosablelistviewlib.item.hint.SwipeHintView
+import com.qubacy.utility.baserecyclerview.item.BaseRecyclerViewItemViewProvider
+import com.qubacy.utility.baserecyclerview.item.data.BaseRecyclerViewItemData
 
 class ChoosableItemViewProvider<
-    ContentItemDataType : ChoosableItemContentViewData,
-    ContentViewProviderType : ChoosableItemContentViewProvider<ContentItemDataType>
+    ContentItemDataType : BaseRecyclerViewItemData,
+    ContentViewProviderType : BaseRecyclerViewItemViewProvider<ContentItemDataType>
 >(
     context: Context,
     attrs: AttributeSet?,
@@ -27,7 +26,7 @@ class ChoosableItemViewProvider<
     divider: MaterialDivider? = null
 ) : ConstraintLayout(
     context, attrs
-), ChoosableItemContentViewProvider<ContentItemDataType> {
+), BaseRecyclerViewItemViewProvider<ContentItemDataType> {
     companion object {
         const val TAG = "ChoosableItemView"
 

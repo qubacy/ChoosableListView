@@ -57,7 +57,7 @@ class ChoosableItemViewProducerTest {
         val viewType = 0
         val parent = mContentView
 
-        val itemView = mProducer.createItemView(parent, viewType)
+        val itemView = mProducer.createItemViewProvider(parent, viewType)
 
         activityScenarioRule.scenario.onActivity {
             mContentView.addView(itemView)

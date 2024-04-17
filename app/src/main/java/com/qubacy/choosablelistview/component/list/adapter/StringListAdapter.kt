@@ -5,12 +5,14 @@ import com.qubacy.choosablelistview.component.list.adapter.producer.StringItemVi
 import com.qubacy.choosablelistview.component.list.item.content.StringContentItemView
 import com.qubacy.choosablelistview.component.list.item.content.data.StringContentItemData
 import com.qubacy.choosablelistviewlib.adapter.ChoosableListAdapter
+import com.qubacy.choosablelistviewlib.adapter.producer.ChoosableItemViewProviderProducer
 
 class StringListAdapter(
     itemViewProducer: StringItemViewProducer
 ) : ChoosableListAdapter<
     StringContentItemData,
     StringContentItemView,
+    ChoosableItemViewProviderProducer<StringContentItemData, StringContentItemView>,
     StringListAdapter.StringListItemViewHolder
 >(itemViewProducer) {
     companion object {

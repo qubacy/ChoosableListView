@@ -3,19 +3,18 @@ package com.qubacy.choosablelistview.component.list.item.content
 import android.content.Context
 import android.util.AttributeSet
 import android.view.View
-import android.view.ViewGroup
 import android.widget.FrameLayout
 import androidx.core.view.setPadding
 import com.google.android.material.textview.MaterialTextView
-import com.qubacy.choosablelistviewlib.item.content.ChoosableItemContentViewProvider
 import com.qubacy.choosablelistview.component.list.item.content.data.StringContentItemData
 import com.qubacy.choosablelistviewlib._common.util.resolveColorAttr
+import com.qubacy.utility.baserecyclerview.item.BaseRecyclerViewItemViewProvider
 
 class StringContentItemView(
     context: Context,
     attrs: AttributeSet?
 ) : FrameLayout(context, attrs),
-    ChoosableItemContentViewProvider<StringContentItemData> {
+    BaseRecyclerViewItemViewProvider<StringContentItemData> {
     companion object {
         const val TAG = "StringContentItemView"
 

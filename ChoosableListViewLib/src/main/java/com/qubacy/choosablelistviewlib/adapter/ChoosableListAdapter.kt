@@ -1,67 +1,40 @@
 package com.qubacy.choosablelistviewlib.adapter
 
-import android.view.ViewGroup
 import androidx.annotation.UiThread
-import androidx.recyclerview.widget.RecyclerView
 import com.qubacy.choosablelistviewlib.adapter.producer.ChoosableItemViewProviderProducer
 import com.qubacy.choosablelistviewlib.item.ChoosableItemViewProvider
-import com.qubacy.choosablelistviewlib.item.content.ChoosableItemContentViewProvider
-import com.qubacy.choosablelistviewlib.item.content.data.ChoosableItemContentViewData
+import com.qubacy.utility.baserecyclerview.adapter.BaseRecyclerViewAdapter
+import com.qubacy.utility.baserecyclerview.item.BaseRecyclerViewItemViewProvider
+import com.qubacy.utility.baserecyclerview.item.data.BaseRecyclerViewItemData
 
 abstract class ChoosableListAdapter<
-    ContentItemDataType : ChoosableItemContentViewData,
-    ContentItemViewProviderType : ChoosableItemContentViewProvider<ContentItemDataType>,
+    ContentItemDataType : BaseRecyclerViewItemData,
+    ContentItemViewProviderType : BaseRecyclerViewItemViewProvider<ContentItemDataType>,
+    СhoosableItemViewProviderProducerType: ChoosableItemViewProviderProducer<ContentItemDataType, ContentItemViewProviderType>,
     ViewHolderType : ChoosableListAdapter.ChoosableListItemViewHolder<ContentItemDataType, ContentItemViewProviderType>
 >(
-    val itemViewProducer: ChoosableItemViewProviderProducer<ContentItemDataType, ContentItemViewProviderType>
-) : RecyclerView.Adapter<ChoosableListAdapter.ChoosableListItemViewHolder<
-    ContentItemDataType, ContentItemViewProviderType
->>(
-
+    val itemViewProducer: СhoosableItemViewProviderProducerType
+) : BaseRecyclerViewAdapter<
+    ContentItemDataType,
+    ChoosableItemViewProvider<ContentItemDataType, ContentItemViewProviderType>,
+    СhoosableItemViewProviderProducerType,
+    ViewHolderType
+>(
+    itemViewProducer
 ) {
     companion object {
         const val TAG = "ChoosableListAdapter"
     }
 
     abstract class ChoosableListItemViewHolder<
-        ContentItemDataType : ChoosableItemContentViewData,
-        ContentViewProviderType : ChoosableItemContentViewProvider<ContentItemDataType>
+        ContentItemDataType : BaseRecyclerViewItemData,
+        ContentItemViewProviderType : BaseRecyclerViewItemViewProvider<ContentItemDataType>
     >(
-        open val choosableItemView: ChoosableItemViewProvider<ContentItemDataType, ContentViewProviderType>
-    ) : RecyclerView.ViewHolder(
+        choosableItemView: ChoosableItemViewProvider<ContentItemDataType, ContentItemViewProviderType>
+    ) : ViewHolder<ContentItemDataType, ChoosableItemViewProvider<ContentItemDataType, ContentItemViewProviderType>>(
         choosableItemView
     ) {
-        fun setData(contentItemData: ContentItemDataType) {
-            choosableItemView.contentViewProvider.setData(contentItemData)
-        }
-    }
 
-    private val mItems: MutableList<ContentItemDataType> = mutableListOf()
-
-    override fun onCreateViewHolder(
-        parent: ViewGroup,
-        viewType: Int
-    ): ChoosableListItemViewHolder<ContentItemDataType, ContentItemViewProviderType> {
-        val itemView = itemViewProducer.createItemView(parent, viewType)
-
-        return createViewHolder(itemView)
-    }
-
-    abstract fun createViewHolder(
-        itemView: ChoosableItemViewProvider<ContentItemDataType, ContentItemViewProviderType>
-    ): ViewHolderType
-
-    override fun onBindViewHolder(
-        holder: ChoosableListItemViewHolder<ContentItemDataType, ContentItemViewProviderType>,
-        position: Int
-    ) {
-        val item = mItems[position]
-
-        holder.setData(item)
-    }
-
-    override fun getItemCount(): Int {
-        return mItems.size
     }
 
     @UiThread
@@ -86,17 +59,5 @@ abstract class ChoosableListAdapter<
         }
 
         wrappedNotifyDataSetChanged()
-    }
-
-    open fun wrappedNotifyItemRemoved(position: Int) {
-        notifyItemRemoved(position)
-    }
-
-    open fun wrappedNotifyItemInserted(position: Int) {
-        notifyItemInserted(position)
-    }
-
-    open fun wrappedNotifyDataSetChanged() {
-        notifyDataSetChanged()
     }
 }

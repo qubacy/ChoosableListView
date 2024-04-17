@@ -11,20 +11,16 @@ import com.qubacy.choosablelistview.component.list.item.content.data.StringConte
 class StringItemViewProducer(
     context: Context
 ) : ChoosableItemViewProviderProducer<StringContentItemData, StringContentItemView>(context) {
-    /**
-     * Use createChoosableItemView() to obtain a ChoosableItemView instance;
-     */
-    override fun createItemView(
-        parent: ViewGroup,
-        viewType: Int
-    ): ChoosableItemViewProvider<StringContentItemData, StringContentItemView> {
+    override fun createDivider(context: Context): MaterialDivider {
+        return MaterialDivider(context)
+    }
+
+    override fun createItemViewProvider(
+        parent: ViewGroup, viewType: Int)
+    : ChoosableItemViewProvider<StringContentItemData, StringContentItemView> {
         val contentItemView = StringContentItemView(parent.context, null)
         val itemView = createChoosableItemView(parent, contentItemView)
 
         return itemView
-    }
-
-    override fun createDivider(context: Context): MaterialDivider {
-        return MaterialDivider(context)
     }
 }

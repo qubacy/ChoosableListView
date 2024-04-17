@@ -1,9 +1,9 @@
 package com.qubacy.choosablelistview.component.list.item.content.data
 
-import com.qubacy.choosablelistviewlib.item.content.data.ChoosableItemContentViewData
+import com.qubacy.utility.baserecyclerview.item.data.BaseRecyclerViewItemData
 
 data class StringContentItemData(
     val text: String
-) : ChoosableItemContentViewData {
+) : BaseRecyclerViewItemData {
 
 }

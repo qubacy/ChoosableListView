@@ -9,6 +9,7 @@ import android.view.animation.Interpolator
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.SimpleItemAnimator
 
+// todo: refactor. it should inherit from BaseRecyclerViewItemAnimator;
 class SmoothListItemAnimator(
     val animationDuration: Long = DEFAULT_ANIMATION_DURATION,
     val animationInterpolator: Interpolator = AccelerateDecelerateInterpolator()

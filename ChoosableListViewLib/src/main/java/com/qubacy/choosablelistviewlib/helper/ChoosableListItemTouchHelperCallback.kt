@@ -61,7 +61,7 @@ class ChoosableListItemTouchHelperCallback(
     ) {
         val choosableViewHolder =
             (viewHolder as ChoosableListAdapter.ChoosableListItemViewHolder<*, *>)
-        val itemView = choosableViewHolder.choosableItemView
+        val itemView = choosableViewHolder.baseItemViewProvider
 
         if (isHorizontalSwipe(dX, dY)) {
             val swipeDirection = getSwipeDirectionByDeltaX(dX)
@@ -110,7 +110,7 @@ class ChoosableListItemTouchHelperCallback(
 
         val itemViewHolder = (viewHolder as ChoosableListAdapter.ChoosableListItemViewHolder<*, *>)
 
-        itemViewHolder.choosableItemView.resetView()
+        itemViewHolder.baseItemViewProvider.resetView()
     }
 
     private fun drawItemContent(

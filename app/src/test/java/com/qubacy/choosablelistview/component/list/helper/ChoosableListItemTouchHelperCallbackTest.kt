@@ -180,7 +180,7 @@ class ChoosableListItemTouchHelperCallbackTest {
             ChoosableListAdapter.ChoosableListItemViewHolder::class.java
         )
 
-        Mockito.`when`(viewHolderMock.choosableItemView).thenReturn(itemViewMock)
+        Mockito.`when`(viewHolderMock.baseItemViewProvider).thenReturn(itemViewMock)
         Mockito.`when`(viewHolderMock.adapterPosition).thenReturn(0)
 
         mViewHolder = viewHolderMock

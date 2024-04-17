@@ -6,6 +6,7 @@ import com.qubacy.choosablelistview.component.list.adapter.producer.StringItemVi
 import com.qubacy.choosablelistview.component.list.item.content.data.StringContentItemData
 import com.qubacy.choosablelistviewlib.adapter.ChoosableListAdapter
 import com.qubacy.choosablelistviewlib.item.ChoosableItemViewProvider
+import com.qubacy.utility.baserecyclerview.adapter.BaseRecyclerViewAdapter
 import org.junit.After
 import org.junit.Assert
 import org.junit.Before
@@ -66,7 +67,7 @@ class StringListAdapterTest {
     private fun initAdapter() {
         val itemViewProducer = Mockito.mock(StringItemViewProducer::class.java)
 
-        Mockito.`when`(itemViewProducer.createItemView(AnyMockUtil.anyObject(), Mockito.anyInt()))
+        Mockito.`when`(itemViewProducer.createItemViewProvider(AnyMockUtil.anyObject(), Mockito.anyInt()))
             .thenAnswer {
                 mCreateItemViewCallFlag.set(true)
 
@@ -75,7 +76,7 @@ class StringListAdapterTest {
 
         val adapterSpy = Mockito.spy(StringListAdapter(itemViewProducer))
 
-        ChoosableListAdapter::class.java
+        BaseRecyclerViewAdapter::class.java
             .getDeclaredField("mItems")
             .apply { isAccessible = true }
             .set(adapterSpy, mItems)

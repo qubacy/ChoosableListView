@@ -10,7 +10,7 @@ import com.qubacy.choosablelistviewlib.item.ChoosableItemViewProvider
 class TestItemViewProviderProducer(
     context: Context
 ) : ChoosableItemViewProviderProducer<TestItemContentViewData, TestItemContentView>(context) {
-    override fun createItemView(
+    override fun createItemViewProvider(
         parent: ViewGroup,
         viewType: Int
     ): ChoosableItemViewProvider<TestItemContentViewData, TestItemContentView> {
