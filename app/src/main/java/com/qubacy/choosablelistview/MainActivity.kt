@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.qubacy.choosablelistviewlib._common.direction.SwipeDirection
 import com.qubacy.choosablelistview.databinding.ActivityMainBinding
-import com.qubacy.choosablelistviewlib.animator.SmoothListItemAnimator
+import com.qubacy.choosablelistviewlib.item.animator.ChoosableListItemAnimator
 import com.qubacy.choosablelistview.component.list.adapter.StringListAdapter
 import com.qubacy.choosablelistviewlib.helper.ChoosableListItemTouchHelperCallback
 import com.qubacy.choosablelistview.component.list.adapter.producer.StringItemViewProducer
@@ -59,7 +59,9 @@ class MainActivity : AppCompatActivity(), ChoosableListItemTouchHelperCallback.C
     private fun initListView(listAdapter: StringListAdapter) {
         mBinding.list.apply {
             adapter = listAdapter
-            itemAnimator = SmoothListItemAnimator()
+            itemAnimator = ChoosableListItemAnimator().apply {
+                removeDuration = 200
+            }
         }
     }
 
