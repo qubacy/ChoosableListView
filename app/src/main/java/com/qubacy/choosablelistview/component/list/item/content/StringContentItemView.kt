@@ -51,4 +51,8 @@ class StringContentItemView(
     override fun getView(): View {
         return this
     }
+
+    override fun setViewProviderEnabled(isEnabled: Boolean) {
+        this.isEnabled = isEnabled
+    }
 }

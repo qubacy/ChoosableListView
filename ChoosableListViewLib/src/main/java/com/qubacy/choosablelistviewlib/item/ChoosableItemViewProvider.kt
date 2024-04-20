@@ -146,4 +146,10 @@ class ChoosableItemViewProvider<
     override fun getView(): View {
         return this
     }
+
+    override fun setViewProviderEnabled(isEnabled: Boolean) {
+        this.isEnabled = isEnabled
+
+        contentViewProvider.setViewProviderEnabled(isEnabled)
+    }
 }
