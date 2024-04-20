@@ -6,11 +6,11 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <androidx.recyclerview.widget.RecyclerView
+    <com.qubacy.choosablelistviewlib.view.ChoosableRecyclerView
         android:id="@+id/list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layoutManager="com.qubacy.utility.baserecyclerview.view.layoutmanager.LinearRecyclerViewLayoutManager"
         android:orientation="vertical"
         tools:itemCount="3"
         tools:listitem="@layout/component_choosable_list_item"/>
@@ -21,7 +21,16 @@
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/button_change_enabled"
         android:text="ADD"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/button_change_enabled"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@id/button_add"
+        app:layout_constraintStart_toEndOf="@id/button_add"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:text="CHANGE ENABLED"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

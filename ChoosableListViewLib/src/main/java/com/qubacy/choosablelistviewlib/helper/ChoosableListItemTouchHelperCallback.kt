@@ -33,6 +33,8 @@ class ChoosableListItemTouchHelperCallback(
         const val DEFAULT_HINT_THRESHOLD = 0.5f
     }
 
+    private var mIsSwipeEnabled: Boolean = true
+
     init {
         if (hintThreshold > swipeThreshold)
             throw IllegalArgumentException()
@@ -48,6 +50,14 @@ class ChoosableListItemTouchHelperCallback(
 
     override fun getSwipeThreshold(viewHolder: RecyclerView.ViewHolder): Float {
         return swipeThreshold
+    }
+
+    fun setIsSwipeEnabled(isEnabled: Boolean) {
+        mIsSwipeEnabled = isEnabled
+    }
+
+    override fun isItemViewSwipeEnabled(): Boolean {
+        return super.isItemViewSwipeEnabled() && mIsSwipeEnabled
     }
 
     override fun onChildDraw(

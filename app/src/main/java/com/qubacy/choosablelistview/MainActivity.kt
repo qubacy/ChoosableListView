@@ -11,6 +11,7 @@ import com.qubacy.choosablelistview.component.list.adapter.StringListAdapter
 import com.qubacy.choosablelistviewlib.helper.ChoosableListItemTouchHelperCallback
 import com.qubacy.choosablelistview.component.list.adapter.producer.StringItemViewProducer
 import com.qubacy.choosablelistview.component.list.item.content.data.StringContentItemData
+import com.qubacy.choosablelistviewlib.view.ChoosableRecyclerView
 
 class MainActivity : AppCompatActivity(), ChoosableListItemTouchHelperCallback.Callback {
     companion object {
@@ -25,6 +26,8 @@ class MainActivity : AppCompatActivity(), ChoosableListItemTouchHelperCallback.C
 
     private lateinit var mAdapter: StringListAdapter
 
+    private var mLastIsListEnabled: Boolean = true
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -34,6 +37,7 @@ class MainActivity : AppCompatActivity(), ChoosableListItemTouchHelperCallback.C
         initList()
 
         mBinding.buttonAdd.setOnClickListener { onAddClicked() }
+        mBinding.buttonChangeEnabled.setOnClickListener { onChangeEnabledClicked() }
     }
 
     private fun initList() {
@@ -65,18 +69,21 @@ class MainActivity : AppCompatActivity(), ChoosableListItemTouchHelperCallback.C
         }
     }
 
-    private fun initListItemTouchHelper(listView: RecyclerView) {
+    private fun initListItemTouchHelper(listView: ChoosableRecyclerView) {
         val itemTouchHelperCallback =
-            ChoosableListItemTouchHelperCallback(
-                mCallback = this
-            )
-        val itemTouchHelper = ItemTouchHelper(itemTouchHelperCallback)
+            ChoosableListItemTouchHelperCallback(mCallback = this)
 
-        itemTouchHelper.attachToRecyclerView(listView)
+        listView.setItemTouchHelperCallback(itemTouchHelperCallback)
     }
 
     private fun onAddClicked() {
         mAdapter.addItem(LIST_ITEMS.last())
+    }
+
+    private fun onChangeEnabledClicked() {
+        mLastIsListEnabled = !mLastIsListEnabled
+
+        mBinding.list.setIsEnabled(mLastIsListEnabled)
     }
 
     override fun onItemSwiped(
