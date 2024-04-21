@@ -20,6 +20,7 @@
         <item name="choosableListItemHintThreshold">@fraction/choosable_list_item_hint_threshold</item>
         <item name="choosableListItemLeftHintGuidelinePosition">@fraction/choosable_list_item_hint_threshold</item>
         <item name="choosableListItemHintIconSize">48dp</item>
+        <item name="choosableListItemSwipeBackAnimationDuration">200</item>
     </style>
 
     <style name="Theme.ChoosableListView" parent="Base.Theme.ChoosableListView" />

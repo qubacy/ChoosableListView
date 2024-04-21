@@ -2,6 +2,7 @@ package com.qubacy.choosablelistview
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.CountDownTimer
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.qubacy.choosablelistviewlib._common.direction.SwipeDirection
@@ -90,6 +91,17 @@ class MainActivity : AppCompatActivity(), ChoosableListItemTouchHelperCallback.C
         direction: SwipeDirection,
         position: Int
     ) {
-        mAdapter.removeItemAtPosition(position)
+        //mAdapter.removeItemAtPosition(position)
+        startItemReturnTimer(position)
+    }
+
+    private fun startItemReturnTimer(position: Int) {
+        object : CountDownTimer(3000, 3000) {
+            override fun onTick(millisUntilFinished: Long) {  }
+
+            override fun onFinish() {
+                mBinding.list.returnSwipedItem(position)
+            }
+        }.start()
     }
 }

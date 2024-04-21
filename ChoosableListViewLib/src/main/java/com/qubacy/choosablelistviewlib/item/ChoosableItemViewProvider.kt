@@ -1,5 +1,7 @@
 package com.qubacy.choosablelistviewlib.item
 
+import android.animation.Animator
+import android.animation.AnimatorListenerAdapter
 import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
@@ -11,6 +13,7 @@ import com.qubacy.choosablelistviewlib.R
 import com.qubacy.choosablelistviewlib._common.direction.SwipeDirection
 import com.qubacy.choosablelistviewlib._common.util.resolveDimenAttr
 import com.qubacy.choosablelistviewlib._common.util.resolveFractionAttr
+import com.qubacy.choosablelistviewlib._common.util.resolveIntegerAttr
 import com.qubacy.choosablelistviewlib.databinding.ComponentChoosableListItemBinding
 import com.qubacy.choosablelistviewlib.item.hint.SwipeHintView
 import com.qubacy.utility.baserecyclerview.item.BaseRecyclerViewItemViewProvider
@@ -31,6 +34,7 @@ class ChoosableItemViewProvider<
         const val TAG = "ChoosableItemView"
 
         const val DEFAULT_HINT_GUIDELINE_POSITION = 0.5f
+        const val DEFAULT_SWIPE_BACK_ANIMATION_DURATION = 200L
     }
 
     @ColorInt
@@ -40,6 +44,8 @@ class ChoosableItemViewProvider<
 
     private var mLeftHintGuidelinePosition: Float = DEFAULT_HINT_GUIDELINE_POSITION
     private var mRightHintGuidelinePosition: Float = DEFAULT_HINT_GUIDELINE_POSITION
+
+    private var mSwipeBackAnimationDuration: Long = DEFAULT_SWIPE_BACK_ANIMATION_DURATION
 
     private var mHeightInPx: Float? = null
 
@@ -61,6 +67,8 @@ class ChoosableItemViewProvider<
         mRightHintGuidelinePosition = 1 - leftHintGuidelinePosition
 
         mHeightInPx = context.theme.resolveDimenAttr(R.attr.choosableListItemHeight)
+        mSwipeBackAnimationDuration = context.theme.resolveIntegerAttr(
+            R.attr.choosableListItemSwipeBackAnimationDuration).toLong()
     }
 
     private fun inflate(contentView: View, divider: MaterialDivider? = null) {
@@ -151,5 +159,28 @@ class ChoosableItemViewProvider<
         this.isEnabled = isEnabled
 
         contentViewProvider.setViewProviderEnabled(isEnabled)
+    }
+
+    fun swipeBack(
+        onSwipeBackEnded: (() -> Unit)? = null
+    ) {
+        val contentView = contentViewProvider.getView()
+
+        val endAction = {
+            contentView.apply {
+                translationX = 0f
+            }
+
+            onSwipeBackEnded?.invoke()
+        }
+
+        contentView.animate().apply {
+            translationX(0f)
+
+            duration = mSwipeBackAnimationDuration
+        }.setListener(object : AnimatorListenerAdapter() {
+            override fun onAnimationCancel(animation: Animator) { endAction() }
+            override fun onAnimationEnd(animation: Animator) { endAction() }
+        }).start()
     }
 }

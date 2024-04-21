@@ -90,6 +90,20 @@ class ChoosableListItemTouchHelperCallback(
         drawItemContent(c, itemView, itemView.contentViewProvider.getView(), dX)
     }
 
+    override fun onChildDrawOver(
+        c: Canvas,
+        recyclerView: RecyclerView,
+        viewHolder: RecyclerView.ViewHolder?,
+        dX: Float,
+        dY: Float,
+        actionState: Int,
+        isCurrentlyActive: Boolean
+    ) {
+        Log.d(TAG, "onChildDrawOver(): isCurrentlyActive = $isCurrentlyActive; dX = $dX;")
+
+        super.onChildDrawOver(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive)
+    }
+
     private fun adjustBackground(
         itemView: ChoosableItemViewProvider<*, *>,
         itemHintView: SwipeHintView,
@@ -175,6 +189,8 @@ class ChoosableListItemTouchHelperCallback(
     }
 
     override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+        viewHolder as ChoosableListAdapter.ChoosableListItemViewHolder<*, *>
+
         val position = viewHolder.adapterPosition
         val swipeDirection = getSwipeDirectionByDirection(direction)
 

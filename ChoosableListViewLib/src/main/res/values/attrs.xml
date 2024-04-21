@@ -28,5 +28,5 @@
     <attr name="choosableListItemHintThreshold" format="fraction"/>
     <attr name="choosableListItemLeftHintGuidelinePosition" format="fraction"/>
     <attr name="choosableListItemHintIconSize" format="dimension"/>
-
+    <attr name="choosableListItemSwipeBackAnimationDuration" format="integer"/>
 </resources>
