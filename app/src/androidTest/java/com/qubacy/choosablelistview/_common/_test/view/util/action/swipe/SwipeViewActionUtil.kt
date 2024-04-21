@@ -17,4 +17,13 @@ object SwipeViewActionUtil {
             Swipe.SLOW, startCoordsProvider, { floatArrayOf(endX, endY) }, Press.FINGER
         )
     }
+
+    fun generateSwipeViewAction(
+        startCoordsProvider: CoordinatesProvider = GeneralLocation.CENTER,
+        endCoordsProvider: CoordinatesProvider
+    ): ViewAction {
+        return GeneralSwipeAction(
+            Swipe.SLOW, startCoordsProvider, endCoordsProvider, Press.FINGER
+        )
+    }
 }
